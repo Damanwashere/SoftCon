@@ -10,22 +10,11 @@
         <maven.compiler.release>21</maven.compiler.release>
         <exec.mainClass>com.mycompany.softwareconstructionass2.SoftwareConstructionAss2</exec.mainClass>
     </properties>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>6.0.0</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>6.0.0</version> <!-- can be omitted when using the BOM -->
+            <version>5.10.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -34,15 +23,13 @@
             <version>10.14.2.0</version>
         </dependency>
     </dependencies>
+    
+    
     <build>
         <plugins>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.5.4</version>
-            </plugin>
-            <plugin>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.5.4</version>
+                <version>3.2.5</version>
             </plugin>
         </plugins>
     </build>

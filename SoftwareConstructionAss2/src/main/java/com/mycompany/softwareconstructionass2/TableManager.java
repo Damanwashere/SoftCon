@@ -7,7 +7,7 @@ package com.mycompany.softwareconstructionass2;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -38,12 +38,7 @@ public class TableManager {
         }
     }
     
-    @Test
-    public void testConnection() {
-        TableManager db = new TableManager();
-        assertNotNull(db.getConnection(), "Database connection should not be null");
-    }
-}
+    
     
     public void closeConnections() {
         if (conn != null) {
@@ -54,4 +49,19 @@ public class TableManager {
             }
         }
     }
+    
+    public void UserTable(){
+        
+    }
+    
+    public static void main(String[] args) {
+        TableManager dbManager = new TableManager();
+        System.out.println(dbManager.getConnection());
+    }
+    
+//    @Test
+//    public void testConnection() {
+//        TableManager db = new TableManager();
+//        assertNotNull(db.getConnection(), "Database connection should not be null");
+//    }
 }
