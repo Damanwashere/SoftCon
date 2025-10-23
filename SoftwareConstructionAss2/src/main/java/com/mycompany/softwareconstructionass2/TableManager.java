@@ -15,7 +15,7 @@ public class TableManager {
     
     DataBaseManager DBManage = new DataBaseManager();
     
-    public void CreateUserTable() throws SQLException{
+    public void createUserTable() throws SQLException{
         try (Statement stmt = DBManage.conn.createStatement()) {
             stmt.executeUpdate("CREATE TABLE USERS(USER_ID INT, NAME VARCHAR(50), DISCOUNT VARCHAR(50))");
             System.out.println("User Table created.");
@@ -28,7 +28,7 @@ public class TableManager {
         }   
     }
     
-    public void CreateTicketTable() throws SQLException{
+    public void createTicketTable() throws SQLException{
         try (Statement stmt = DBManage.conn.createStatement()) {
             stmt.executeUpdate("CREATE TABLE TICKET(TICKET_ID INT, USER_ID INT,  VENUE VARCHAR(50), SEAT VARCHAR(5))");
             System.out.println("Venue Table created.");
@@ -41,11 +41,14 @@ public class TableManager {
         }   
     }
     
+    public void addUser()
+    
     
     public static void main(String[] args) {
         TableManager test = new TableManager();
         try{
             test.CreateUserTable();
+            test.
         } catch(SQLException e) {
             System.out.println("something went wrong in table creation thats not table does not exist" + e);
         }

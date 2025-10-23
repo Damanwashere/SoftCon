@@ -23,8 +23,6 @@
             <version>10.14.2.0</version>
         </dependency>
     </dependencies>
-    
-    
     <build>
         <plugins>
             <plugin>
