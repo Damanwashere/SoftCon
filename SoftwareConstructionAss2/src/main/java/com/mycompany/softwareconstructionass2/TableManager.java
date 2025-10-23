@@ -4,64 +4,51 @@
  */
 package com.mycompany.softwareconstructionass2;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-//import org.junit.jupiter.api.Test;
+import java.sql.Statement;
 
 /**
  *
  * @author GGPC
  */
 public class TableManager {
-    private static final String user = "pdc"; //your DB username
-    private static final String pass = "pdc"; //your DB password
-    private static final String url = "jdbc:derby:SoftConDB; create=true"; //url of the DB host
     
-    public TableManager(){
-        establishConnection();
-    }
+    DataBaseManager DBManage = new DataBaseManager();
     
-    Connection conn;
-    
-    public Connection getConnection() {
-        return this.conn;
-    }
-    
-    public void establishConnection() {
-        try{
-            conn=DriverManager.getConnection(url, user, pass);
-            System.out.println( url +" connected");
-        }
-        catch (SQLException ex) {
-            System.err.println("SQLException: " + ex.getMessage());
-        }
-    }
-    
-    
-    
-    public void closeConnections() {
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
+    public void CreateUserTable() throws SQLException{
+        try (Statement stmt = DBManage.conn.createStatement()) {
+            stmt.executeUpdate("CREATE TABLE USERS(USER_ID INT, NAME VARCHAR(50), DISCOUNT VARCHAR(50))");
+            System.out.println("User Table created.");
+        } catch (SQLException e) {
+            if (e.getSQLState().equals("X0Y32")) {
+                System.out.println("User Table already exists.");
+            } else {
+                throw e;
             }
-        }
+        }   
     }
     
-    public void UserTable(){
-        
+    public void CreateTicketTable() throws SQLException{
+        try (Statement stmt = DBManage.conn.createStatement()) {
+            stmt.executeUpdate("CREATE TABLE TICKET(TICKET_ID INT, USER_ID INT,  VENUE VARCHAR(50), SEAT VARCHAR(5))");
+            System.out.println("Venue Table created.");
+        } catch (SQLException e) {
+            if (e.getSQLState().equals("X0Y32")) {
+                System.out.println("Venue Table already exists.");
+            } else {
+                throw e;
+            }
+        }   
     }
+    
     
     public static void main(String[] args) {
-        TableManager dbManager = new TableManager();
-        System.out.println(dbManager.getConnection());
+        TableManager test = new TableManager();
+        try{
+            test.CreateUserTable();
+        } catch(SQLException e) {
+            System.out.println("something went wrong in table creation thats not table does not exist" + e);
+        }
+            
     }
-    
-//    @Test
-//    public void testConnection() {
-//        TableManager db = new TableManager();
-//        assertNotNull(db.getConnection(), "Database connection should not be null");
-//    }
 }
