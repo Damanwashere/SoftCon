@@ -27,9 +27,7 @@ public abstract class UserData { // this is an abstract class used as the base o
     
     String getName() {
         return name;
-    }
-
-    
+    }    
 
     //this is the abstract function which is edited by other versions of user
     public abstract double getDiscount(double price);
