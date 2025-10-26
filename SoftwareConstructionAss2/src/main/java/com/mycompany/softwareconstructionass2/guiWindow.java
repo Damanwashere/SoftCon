@@ -23,20 +23,26 @@ public class guiWindow extends JFrame
     {
         super(name);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1000, 500); 
         
         JPanel loginWrapper = new JPanel(new BorderLayout());
+        loginWrapper.setPreferredSize(new Dimension(1000, 500));
         
         LoginPanel contentPanel = new LoginPanel();
         loginWrapper.add(contentPanel, BorderLayout.CENTER);        
         loginWrapper.add(new InitialPanel(this), BorderLayout.SOUTH);
-                     
+        
         mainCard.add(loginWrapper, LOGIN_PANEL);
         
         NewUserPanel newUserPanel = new NewUserPanel();
+        newUserPanel.setPreferredSize(new Dimension(1000, 500));
+        
         mainCard.add(newUserPanel, NEW_USER_PANEL);
         
-        this.add(mainCard, BorderLayout.CENTER);
+        this.add(mainCard, BorderLayout.CENTER);        
+        this.pack();
+        //locking gui size so end user doesnt drag it and maybe our code doesnt work lmao
+        this.setResizable(false);
+        
         
         panelLayout.show(mainCard, LOGIN_PANEL);
     }
