@@ -28,18 +28,18 @@ public class NewUserPanel extends JPanel
         JPanel wrapper = new JPanel(new GridBagLayout());
         
         //user input name here
-//        createUserData(wrapper, new JLabel("Name:"), 0, 0, GridBagConstraints.EAST);
-//        createUserData(wrapper, nameField, 1, 0, GridBagConstraints.WEST);
-//        //age here
-//        createUserData(wrapper, new JLabel("Age:"), 0, 1, GridBagConstraints.EAST);
-//        createUserData(wrapper, ageField, 1, 1, GridBagConstraints.WEST);
+        createUserData(wrapper, new JLabel("Name:"), 0, 0, GridBagConstraints.EAST);
+        createUserData(wrapper, nameField, 1, 0, GridBagConstraints.WEST);
+        //age here
+        createUserData(wrapper, new JLabel("Age:"), 0, 1, GridBagConstraints.EAST);
+        createUserData(wrapper, ageField, 1, 1, GridBagConstraints.WEST);
         
         //student discount
         GridBagConstraints guiCons = new GridBagConstraints();
         guiCons.insets = new Insets(5, 5, 5, 5);
         guiCons.gridx = 0;
-        guiCons.gridwidth = 2;
-        guiCons.anchor = GridBagConstraints.WEST;        
+        guiCons.gridwidth = 0;
+        guiCons.anchor = GridBagConstraints.CENTER;        
         guiCons.gridy = 2;
         wrapper.add(studentCheckBox, guiCons);
         
@@ -48,7 +48,18 @@ public class NewUserPanel extends JPanel
     
     private void createUserData(JPanel panel, Component component, int x, int y, int anchor)
     {
-                
+        GridBagConstraints con = new GridBagConstraints();
+        con.insets = new Insets(5, 5, 5, 5);
+        con.gridx = x;
+        con.gridy = y;
+        con.anchor = anchor;
+        
+        if(component instanceof JTextField)
+        {
+            con.fill = GridBagConstraints.HORIZONTAL;
+        }
+        
+        panel.add(component, con);
     }
     
     //hold til I work out storing logic
