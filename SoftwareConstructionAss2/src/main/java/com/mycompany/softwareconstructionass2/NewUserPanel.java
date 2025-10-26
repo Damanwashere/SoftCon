@@ -6,6 +6,7 @@ package com.mycompany.softwareconstructionass2;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  *
@@ -23,8 +24,9 @@ public class NewUserPanel extends JPanel
     public NewUserPanel()
     {
         this.setPreferredSize(newUserPanelSize);        
-        this.setLayout(new GridBagLayout());
+        this.setLayout(new BorderLayout());
         
+        JPanel contentPanel = new JPanel(new GridBagLayout());
         JPanel wrapper = new JPanel(new GridBagLayout());
         
         //user input name here
@@ -43,7 +45,16 @@ public class NewUserPanel extends JPanel
         guiCons.gridy = 2;
         wrapper.add(studentCheckBox, guiCons);
         
-        this.add(wrapper, new GridBagConstraints());        
+        contentPanel.add(wrapper, new GridBagConstraints());
+        this.add(contentPanel, BorderLayout.CENTER);
+        
+        //comfirm button to create user
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton confirmButton = new JButton("Create Account");
+        confirmButton.addActionListener(this::holdData);
+        buttonPanel.add(confirmButton);
+        
+        this.add(buttonPanel, BorderLayout.SOUTH);        
     }
     
     private void createUserData(JPanel panel, Component component, int x, int y, int anchor)
@@ -63,8 +74,25 @@ public class NewUserPanel extends JPanel
     }
     
     //hold til I work out storing logic
-    private void holdData()
+    private void holdData(ActionEvent e)
     {
+        String name = nameField.getText().trim();
+        //should hopefully convert input into grabbable int
+        int age = 0;
+        //will fix logic later
+        try
+        {
+             age = Integer.parseInt(ageField.getText().trim());
+        }
+        catch(NumberFormatException g)
+        {
+            System.err.println("User didnt input a number");
+        }
+        boolean isStudent = studentCheckBox.isSelected();
         
+        //test
+        String testMessage = String.format("testing storage \nName: %s \nAge: %d \nStudent: %b", name, age, isStudent);
+        
+        JOptionPane.showMessageDialog(this, testMessage);
     }
 }
