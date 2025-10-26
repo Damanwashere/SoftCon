@@ -13,17 +13,47 @@ import java.awt.*;
  */
 public class NewUserPanel extends JPanel 
 {
-    private JTextField userField;
+    private JTextField nameField = new JTextField(20);
+    private JTextField ageField = new JTextField(3);
+    
+    private final JCheckBox studentCheckBox = new JCheckBox("Student");
+    
+    private static final Dimension newUserPanelSize = new Dimension(1000, 500);
     
     public NewUserPanel()
     {
+        this.setPreferredSize(newUserPanelSize);        
         this.setLayout(new GridBagLayout());
         
-        this.add(new JLabel("new User test"));
+        JPanel wrapper = new JPanel(new GridBagLayout());
+        
+        //user input name here
+//        createUserData(wrapper, new JLabel("Name:"), 0, 0, GridBagConstraints.EAST);
+//        createUserData(wrapper, nameField, 1, 0, GridBagConstraints.WEST);
+//        //age here
+//        createUserData(wrapper, new JLabel("Age:"), 0, 1, GridBagConstraints.EAST);
+//        createUserData(wrapper, ageField, 1, 1, GridBagConstraints.WEST);
+        
+        //student discount
+        GridBagConstraints guiCons = new GridBagConstraints();
+        guiCons.insets = new Insets(5, 5, 5, 5);
+        guiCons.gridx = 0;
+        guiCons.gridwidth = 2;
+        guiCons.anchor = GridBagConstraints.WEST;        
+        guiCons.gridy = 2;
+        wrapper.add(studentCheckBox, guiCons);
+        
+        this.add(wrapper, new GridBagConstraints());        
     }
     
-    public String getUsername()
+    private void createUserData(JPanel panel, Component component, int x, int y, int anchor)
     {
-        return userField.getText();
+                
+    }
+    
+    //hold til I work out storing logic
+    private void holdData()
+    {
+        
     }
 }
