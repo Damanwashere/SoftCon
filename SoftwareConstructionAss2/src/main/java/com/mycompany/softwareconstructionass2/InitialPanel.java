@@ -18,13 +18,21 @@ public class InitialPanel extends JPanel
     public InitialPanel(guiWindow display)
     {
         this.displayWindow = display;        
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 5));
+        this.setLayout(new BorderLayout(20, 20));
         
-        int offset = 20;
-        this.setBorder(BorderFactory.createEmptyBorder(5, offset, 5, offset));
+        JLabel g105 = new JLabel("Group 105 ticket booking service");
+        g105.setFont(new Font("Monospaced", Font.BOLD, 28));
+        g105.setHorizontalAlignment(SwingConstants.CENTER);
+        //pushing away fromtop
+        g105.setBorder(BorderFactory.createEmptyBorder(25, 0, 0, 0));
+        this.add(g105, BorderLayout.NORTH);
         
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 100, 10));
         JButton newUserButton = new JButton("New User");
-        JButton loginButton = new JButton("login");        
+        JButton loginButton = new JButton("login");
+        
+        newUserButton.setPreferredSize(new Dimension(150, 100));
+        loginButton.setPreferredSize(new Dimension(150, 100));
         
         newUserButton.addActionListener(e -> 
         {
@@ -36,7 +44,10 @@ public class InitialPanel extends JPanel
             displayWindow.showPanel(guiWindow.LOGIN_PANEL);          
         });
         
-        this.add(newUserButton);
-        this.add(loginButton);        
+        buttonPanel.add(newUserButton);
+        buttonPanel.add(loginButton);
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 25, 0));
+        
+        this.add(buttonPanel, BorderLayout.SOUTH);        
     }
 }
