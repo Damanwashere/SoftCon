@@ -23,18 +23,15 @@ public class guiWindow extends JFrame
     public guiWindow(String name)
     {
         super(name);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        JPanel loginWrapper = new JPanel(new BorderLayout());
-        loginWrapper.setPreferredSize(new Dimension(1000, 500));        
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);              
         
         InitialPanel initialPanel = new InitialPanel(this);
+        initialPanel.setPreferredSize(new Dimension(1000, 500));
         mainCard.add(initialPanel, INITIAL_PANEL);
         
-        LoginPanel contentPanel = new LoginPanel();
-        loginWrapper.add(contentPanel, BorderLayout.CENTER);        
-        loginWrapper.add(new InitialPanel(this), BorderLayout.SOUTH);        
-        mainCard.add(loginWrapper, LOGIN_PANEL);
+        LoginPanel loginPanel = new LoginPanel(this);      
+        loginPanel.setPreferredSize(new Dimension(1000, 500));        
+        mainCard.add(loginPanel, LOGIN_PANEL);
         
         NewUserPanel newUserPanel = new NewUserPanel();
         newUserPanel.setPreferredSize(new Dimension(1000, 500));        

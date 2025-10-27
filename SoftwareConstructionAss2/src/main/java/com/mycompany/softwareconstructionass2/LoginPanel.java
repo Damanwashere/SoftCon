@@ -13,7 +13,7 @@ import java.awt.*;
  */
 public class LoginPanel extends JPanel
 {
-    public LoginPanel()
+    public LoginPanel(guiWindow login)
     {
         this.setLayout(new FlowLayout());
         
