@@ -20,6 +20,9 @@ public class guiWindow extends JFrame
     final static String LOGIN_PANEL = "user login";
     final static String NEW_USER_PANEL = "new user stuff";
     final static String CHOICE_PANEL = "user selection";
+    final static String PURCHASE_PANEL = "purchase tickets";
+    final static String TICKET_PANEL = "view purchased tickets";
+    
     
     private static final Dimension PanelSize = new Dimension(1000, 500);
     
@@ -43,6 +46,14 @@ public class guiWindow extends JFrame
         ChoicePanel choicePanel = new ChoicePanel(this);
         choicePanel.setPreferredSize(PanelSize);
         mainCard.add(choicePanel, CHOICE_PANEL);
+        
+        PurchasePanel purchasePanel = new PurchasePanel(this);
+        purchasePanel.setPreferredSize(PanelSize);
+        mainCard.add(purchasePanel, PURCHASE_PANEL);
+        
+        TicketPanel ticketPanel = new TicketPanel(this);
+        ticketPanel.setPreferredSize(PanelSize);
+        mainCard.add(ticketPanel, TICKET_PANEL);
         
         this.add(mainCard, BorderLayout.CENTER);        
         this.pack();
