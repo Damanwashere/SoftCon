@@ -19,6 +19,9 @@ public class guiWindow extends JFrame
     final static String INITIAL_PANEL = "start panel";
     final static String LOGIN_PANEL = "user login";
     final static String NEW_USER_PANEL = "new user stuff";
+    final static String CHOICE_PANEL = "user selection";
+    
+    private static final Dimension PanelSize = new Dimension(1000, 500);
     
     public guiWindow(String name)
     {
@@ -26,16 +29,20 @@ public class guiWindow extends JFrame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);              
         
         InitialPanel initialPanel = new InitialPanel(this);
-        initialPanel.setPreferredSize(new Dimension(1000, 500));
+        initialPanel.setPreferredSize(PanelSize);
         mainCard.add(initialPanel, INITIAL_PANEL);
         
         LoginPanel loginPanel = new LoginPanel(this);      
-        loginPanel.setPreferredSize(new Dimension(1000, 500));        
+        loginPanel.setPreferredSize(PanelSize);        
         mainCard.add(loginPanel, LOGIN_PANEL);
         
         NewUserPanel newUserPanel = new NewUserPanel();
-        newUserPanel.setPreferredSize(new Dimension(1000, 500));        
-        mainCard.add(newUserPanel, NEW_USER_PANEL);
+        newUserPanel.setPreferredSize(PanelSize);        
+        mainCard.add(newUserPanel, NEW_USER_PANEL);        
+        
+        ChoicePanel choicePanel = new ChoicePanel(this);
+        choicePanel.setPreferredSize(PanelSize);
+        mainCard.add(choicePanel, CHOICE_PANEL);
         
         this.add(mainCard, BorderLayout.CENTER);        
         this.pack();

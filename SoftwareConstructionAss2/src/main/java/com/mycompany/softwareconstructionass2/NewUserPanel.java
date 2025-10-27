@@ -17,13 +17,13 @@ public class NewUserPanel extends JPanel
     private JTextField nameField = new JTextField(20);
     private JTextField ageField = new JTextField(3);
     
-    private final JCheckBox studentCheckBox = new JCheckBox("Student");
+    private final JCheckBox studentCheckBox = new JCheckBox("Student");    
+    private static final Dimension PanelSize = new Dimension(1000, 500);
     
-    private static final Dimension newUserPanelSize = new Dimension(1000, 500);
-    
+    //will change dimension stuff later
     public NewUserPanel()
     {
-        this.setPreferredSize(newUserPanelSize);        
+        this.setPreferredSize(PanelSize);        
         this.setLayout(new BorderLayout());
         
         JPanel contentPanel = new JPanel(new GridBagLayout());
@@ -53,6 +53,7 @@ public class NewUserPanel extends JPanel
         JButton confirmButton = new JButton("Create Account");
         confirmButton.addActionListener(this::holdData);
         buttonPanel.add(confirmButton);
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 25, 0));
         
         this.add(buttonPanel, BorderLayout.SOUTH);        
     }
