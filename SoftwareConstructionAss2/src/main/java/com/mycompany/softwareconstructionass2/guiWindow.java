@@ -26,8 +26,11 @@ public class guiWindow extends JFrame
     final static String VENUE_B_PANEL = "Gwyns arena venue";
     final static String VENUE_C_PANEL = "Lucys theatre venue";
     
+    private UserData currentUser;
+    
     private static final Dimension PanelSize = new Dimension(1000, 500);
     final boolean[][] testSeats = testMatrix.test_matrix;
+    
     public guiWindow(String name)
     {
         super(name);
@@ -80,5 +83,15 @@ public class guiWindow extends JFrame
     public void showPanel(String panelName)
     {
         panelLayout.show(mainCard, panelName);
+    }
+    
+    public void setCurrentUser(UserData user)
+    {
+        this.currentUser = user;
+    }
+    
+    public UserData getCurrentUser()
+    {
+        return this.currentUser;
     }
 }

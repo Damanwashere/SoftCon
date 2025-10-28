@@ -6,6 +6,7 @@ package com.mycompany.softwareconstructionass2;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 /**
  *
@@ -13,12 +14,14 @@ import java.awt.*;
  */
 public class LoginPanel extends JPanel
 {
-    private JTextField UserField;
+    private final JTextField UserField;
     private guiWindow displayWindow;
+    private UserTableManager userManager;
     
     public LoginPanel(guiWindow window)
     {
         this.displayWindow = window;
+        this.userManager = new UserTableManager();
         this.setLayout(new BorderLayout(20, 20));
         
         JPanel panel = new JPanel(new GridBagLayout());
@@ -43,7 +46,27 @@ public class LoginPanel extends JPanel
         //setting layout of panels for now, will work login logic later
         loginButton.addActionListener(e ->
         {
-            displayWindow.showPanel(guiWindow.CHOICE_PANEL);
+            String username = UserField.getText();
+            try
+            {
+                UserData logUser = userManager.getUser(username);
+                
+                if(logUser != null)
+                {    
+                    displayWindow.setCurrentUser(logUser);
+                    displayWindow.showPanel(guiWindow.CHOICE_PANEL);
+                    //if you don't do this and the person logs out and returns name will still be there lmao
+                    UserField.setText("");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this, "user not found: ", "username", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            catch(SQLException ex)
+            {
+                JOptionPane.showMessageDialog(this, "sql", "database error", JOptionPane.ERROR_MESSAGE);
+            }            
         });
         cons.gridx = 1;
         cons.gridy = 2;
@@ -63,11 +86,5 @@ public class LoginPanel extends JPanel
         exitPanel.add(returnButton);
         
         this.add(exitPanel, BorderLayout.SOUTH);
-    }   
-
-    //need code to check if user exists before going to next panel
-//    someFunction()
-//    {
-//        
-//    }
+    }
 }
