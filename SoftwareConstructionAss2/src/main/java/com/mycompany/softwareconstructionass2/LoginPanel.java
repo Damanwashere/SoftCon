@@ -16,10 +16,10 @@ public class LoginPanel extends JPanel
     private JTextField UserField;
     private guiWindow displayWindow;
     
-    public LoginPanel(guiWindow login)
+    public LoginPanel(guiWindow window)
     {
-        this.displayWindow = login;
-        setLayout(new BorderLayout(20, 20));
+        this.displayWindow = window;
+        this.setLayout(new BorderLayout(20, 20));
         
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints cons = new GridBagConstraints();
@@ -54,7 +54,7 @@ public class LoginPanel extends JPanel
         
         //return so user doesnt need to close if clicked wrong button
         JPanel exitPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JButton returnButton = new JButton("Return to Homepage");
+        JButton returnButton = new JButton("Logout");
         returnButton.setPreferredSize(new Dimension(150, 25));
         returnButton.addActionListener(e ->
         {

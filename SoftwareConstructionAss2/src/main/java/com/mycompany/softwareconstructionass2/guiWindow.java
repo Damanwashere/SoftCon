@@ -22,7 +22,9 @@ public class guiWindow extends JFrame
     final static String CHOICE_PANEL = "user selection";
     final static String PURCHASE_PANEL = "purchase tickets";
     final static String TICKET_PANEL = "view purchased tickets";
-    
+    final static String VENUE_A_PANEL = "Versos concert hall";
+    final static String VENUE_B_PANEL = "Gwyns arena venue";
+    final static String VENUE_C_PANEL = "Lucys theatre venue";
     
     private static final Dimension PanelSize = new Dimension(1000, 500);
     
@@ -54,6 +56,18 @@ public class guiWindow extends JFrame
         TicketPanel ticketPanel = new TicketPanel(this);
         ticketPanel.setPreferredSize(PanelSize);
         mainCard.add(ticketPanel, TICKET_PANEL);
+        
+        VenueAPanel aVenuePanel = new VenueAPanel(this);
+        aVenuePanel.setPreferredSize(PanelSize);
+        mainCard.add(aVenuePanel, VENUE_A_PANEL);
+        
+        VenueBPanel bVenuePanel = new VenueBPanel(this);
+        bVenuePanel.setPreferredSize(PanelSize);
+        mainCard.add(bVenuePanel, VENUE_B_PANEL);
+        
+        VenueCPanel cVenuePanel = new VenueCPanel(this);
+        cVenuePanel.setPreferredSize(PanelSize);
+        mainCard.add(cVenuePanel, VENUE_C_PANEL);
         
         this.add(mainCard, BorderLayout.CENTER);        
         this.pack();
