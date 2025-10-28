@@ -27,7 +27,7 @@ public class guiWindow extends JFrame
     final static String VENUE_C_PANEL = "Lucys theatre venue";
     
     private static final Dimension PanelSize = new Dimension(1000, 500);
-    
+    final boolean[][] testSeats = testMatrix.test_matrix;
     public guiWindow(String name)
     {
         super(name);
@@ -57,7 +57,7 @@ public class guiWindow extends JFrame
         ticketPanel.setPreferredSize(PanelSize);
         mainCard.add(ticketPanel, TICKET_PANEL);
         
-        VenueAPanel aVenuePanel = new VenueAPanel(this);
+        VenueAPanel aVenuePanel = new VenueAPanel(this, testSeats);
         aVenuePanel.setPreferredSize(PanelSize);
         mainCard.add(aVenuePanel, VENUE_A_PANEL);
         
