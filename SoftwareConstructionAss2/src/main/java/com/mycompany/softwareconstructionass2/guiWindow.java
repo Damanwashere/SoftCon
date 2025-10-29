@@ -6,6 +6,7 @@ package com.mycompany.softwareconstructionass2;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 /**
  *
@@ -27,6 +28,7 @@ public class guiWindow extends JFrame
     final static String VENUE_C_PANEL = "Lucys theatre venue";
     
     private UserData currentUser;
+    private UserTableManager userManager;
     
     private static final Dimension PanelSize = new Dimension(1000, 500);
     final boolean[][] testSeats = testMatrix.test_matrix;
@@ -34,7 +36,27 @@ public class guiWindow extends JFrame
     public guiWindow(String name)
     {
         super(name);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);              
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.userManager = new UserTableManager();
+        
+        //testing my login panel
+        UserData testUser = new Adult(1, "John");
+//        UserData test1User = new Student(2, "Zoey");
+        try
+        {
+            this.userManager.createUserTable();
+            this.userManager.addUser(testUser);
+//            userManager.addUser(test1User);
+
+            if(this.userManager.getdbManager().conn != null)
+            {
+                this.userManager.getdbManager().conn.commit();
+            }
+        }
+        catch(SQLException e)
+        {
+            System.err.println("Error: " +e.getMessage());
+        }       
         
         InitialPanel initialPanel = new InitialPanel(this);
         initialPanel.setPreferredSize(PanelSize);
@@ -93,5 +115,10 @@ public class guiWindow extends JFrame
     public UserData getCurrentUser()
     {
         return this.currentUser;
+    }
+    
+    public UserTableManager getUserManager()
+    {
+        return this.userManager;
     }
 }

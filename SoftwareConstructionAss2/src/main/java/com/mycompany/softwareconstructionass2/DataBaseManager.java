@@ -18,11 +18,11 @@ public class DataBaseManager {
     private static final String pass = "pdc"; //your DB password
     private static final String url = "jdbc:derby:SoftConDB; create=true"; //url of the DB host
     
+    Connection conn;
+    
     public DataBaseManager(){
         establishConnection();
     }
-    
-    Connection conn;
     
     public Connection getConnection() {
         return this.conn;

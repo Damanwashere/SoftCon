@@ -21,7 +21,7 @@ public class LoginPanel extends JPanel
     public LoginPanel(guiWindow window)
     {
         this.displayWindow = window;
-        this.userManager = new UserTableManager();
+        this.userManager = displayWindow.getUserManager();
         this.setLayout(new BorderLayout(20, 20));
         
         JPanel panel = new JPanel(new GridBagLayout());
@@ -46,7 +46,7 @@ public class LoginPanel extends JPanel
         //setting layout of panels for now, will work login logic later
         loginButton.addActionListener(e ->
         {
-            String username = UserField.getText();
+            String username = UserField.getText().trim();
             try
             {
                 UserData logUser = userManager.getUser(username);
