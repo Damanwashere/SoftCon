@@ -46,7 +46,7 @@ public class LoginPanel extends JPanel
         //setting layout of panels for now, will work login logic later
         loginButton.addActionListener(e ->
         {
-            String username = UserField.getText().trim();
+            String username = UserField.getText();
             try
             {
                 UserData logUser = userManager.getUser(username);
@@ -77,7 +77,7 @@ public class LoginPanel extends JPanel
         
         //return so user doesnt need to close if clicked wrong button
         JPanel exitPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JButton returnButton = new JButton("Logout");
+        JButton returnButton = new JButton("Return to homepage");
         returnButton.setPreferredSize(new Dimension(150, 25));
         returnButton.addActionListener(e ->
         {

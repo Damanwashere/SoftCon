@@ -148,6 +148,8 @@ public class NewUserPanel extends JPanel
             {
                 displayWindow.setCurrentUser(newUser);
                 displayWindow.showPanel(guiWindow.CHOICE_PANEL);
+                nameField.setText("");
+                ageField.setText("");
             }
             else
             {

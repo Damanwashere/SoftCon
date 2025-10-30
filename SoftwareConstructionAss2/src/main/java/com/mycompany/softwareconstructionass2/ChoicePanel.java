@@ -15,6 +15,8 @@ import java.awt.*;
 public class ChoicePanel extends JPanel
 {
     private guiWindow displayWindow;
+    private JLabel userLabel = new JLabel();
+    private JPanel userPanel;
     
     ChoicePanel(guiWindow window)
     {
@@ -22,14 +24,25 @@ public class ChoicePanel extends JPanel
         this.setLayout(new BorderLayout(20, 20));
         
         //will set this to output username in 
-        JLabel messageLabel = new JLabel("Group 105 Ticket Service");
+        this.userPanel = new JPanel();
+        userPanel.setLayout(new BoxLayout(userPanel, BoxLayout.Y_AXIS));
+        
+        JLabel messageLabel = new JLabel("Welcome User: ");
         messageLabel.setFont(new Font("Monospaced", Font.BOLD, 28));
-        messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        messageLabel.setBorder(BorderFactory.createEmptyBorder(25, 0, 25, 0));
+        messageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        messageLabel.setBorder(BorderFactory.createEmptyBorder(25, 0, 10, 0));
         
-        this.add(messageLabel, BorderLayout.NORTH);
+        userLabel.setText(" a");
+        userLabel.setFont(new Font("Monospaced", Font.PLAIN, 24));
+        userLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        userLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 25, 0));
         
-        JPanel panel = new JPanel(new GridBagLayout());
+        userPanel.add(messageLabel);
+        userPanel.add(userLabel);
+        
+        this.add(userPanel, BorderLayout.NORTH);
+        
+        JPanel panel = new JPanel(new GridBagLayout());  
         GridBagConstraints cons = new GridBagConstraints();        
         
         JButton purchaseButton = new JButton("Purchase new Ticket");        
@@ -60,14 +73,24 @@ public class ChoicePanel extends JPanel
         
         //copy and pasting my return from LoginPanel, will check if this can just be a function later, but idk
         JPanel exitPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JButton returnButton = new JButton("Return to Homepage");
+        JButton returnButton = new JButton("Logout");
         returnButton.setPreferredSize(new Dimension(150, 25));
         returnButton.addActionListener(e ->
         {
-           displayWindow.showPanel(guiWindow.INITIAL_PANEL);
+           displayWindow.logout();
         });
         exitPanel.add(returnButton);
         
         this.add(exitPanel, BorderLayout.SOUTH);
+    }
+    
+    public void updateCurrentUser(UserData userd)
+    {
+        UserData user = userd;
+        
+        if(user != null)
+        {
+            this.userLabel.setText(user.getName());
+        }
     }
 }

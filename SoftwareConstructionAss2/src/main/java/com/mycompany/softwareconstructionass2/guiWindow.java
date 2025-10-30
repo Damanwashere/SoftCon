@@ -16,11 +16,12 @@ public class guiWindow extends JFrame
 {
     private CardLayout panelLayout = new CardLayout();
     private JPanel mainCard = new JPanel(panelLayout);
+    private ChoicePanel choicePanel;
     
     final static String INITIAL_PANEL = "start panel";
     final static String LOGIN_PANEL = "user login";
     final static String NEW_USER_PANEL = "new user stuff";
-    final static String CHOICE_PANEL = "user selection";
+    final static String CHOICE_PANEL = "CHOICE_PANEL";
     final static String PURCHASE_PANEL = "purchase tickets";
     final static String TICKET_PANEL = "view purchased tickets";
     final static String VENUE_A_PANEL = "Versos concert hall";
@@ -40,12 +41,12 @@ public class guiWindow extends JFrame
         this.userManager = new UserTableManager();
         
         //testing my login panel
-        UserData testUser = new Adult(1, "John");
+//        UserData testUser = new Adult(1, "John");
 //        UserData test1User = new Student(2, "Zoey");
         try
         {
             this.userManager.createUserTable();
-            this.userManager.addUser(testUser);
+//            this.userManager.addUser(testUser);
 //            userManager.addUser(test1User);
 
             if(this.userManager.getdbManager().conn != null)
@@ -70,7 +71,7 @@ public class guiWindow extends JFrame
         newUserPanel.setPreferredSize(PanelSize);        
         mainCard.add(newUserPanel, NEW_USER_PANEL);        
         
-        ChoicePanel choicePanel = new ChoicePanel(this);
+        this.choicePanel = new ChoicePanel(this);
         choicePanel.setPreferredSize(PanelSize);
         mainCard.add(choicePanel, CHOICE_PANEL);
         
@@ -105,6 +106,12 @@ public class guiWindow extends JFrame
     public void showPanel(String panelName)
     {
         panelLayout.show(mainCard, panelName);
+        
+        //need to refresh user and ticket stuff for panels
+        if(panelName.equals(guiWindow.CHOICE_PANEL))
+        {
+            this.choicePanel.updateCurrentUser(this.getCurrentUser());
+        }
     }
     
     public void setCurrentUser(UserData user)
@@ -120,5 +127,12 @@ public class guiWindow extends JFrame
     public UserTableManager getUserManager()
     {
         return this.userManager;
+    }
+    
+    public void logout()
+    {
+        this.currentUser = null;
+        
+        showPanel(guiWindow.INITIAL_PANEL);
     }
 }
