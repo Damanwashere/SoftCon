@@ -7,6 +7,7 @@ package com.mycompany.softwareconstructionass2;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 /**
  *
@@ -18,12 +19,18 @@ public class NewUserPanel extends JPanel
     private JTextField ageField = new JTextField(3);
     
     private final JCheckBox studentCheckBox = new JCheckBox("Student");
-    guiWindow displayWindow;
+    private final JLabel createLabel = new JLabel("enter details and submit");
+    
+    private UserData newUser;
+    
+    private guiWindow displayWindow;
+    private UserTableManager userManager;
     
     //will change dimension stuff later
-    public NewUserPanel(guiWindow window)
+    public NewUserPanel(guiWindow window, UserTableManager manager)
     {
-        displayWindow = window;        
+        this.displayWindow = window;
+        this.userManager = manager;
         this.setLayout(new BorderLayout());
         
         JPanel contentPanel = new JPanel(new GridBagLayout());
@@ -77,23 +84,79 @@ public class NewUserPanel extends JPanel
     //hold til I work out storing logic
     private void holdData(ActionEvent e)
     {
-        String name = nameField.getText().trim();
-        //should hopefully convert input into grabbable int
+        createLabel.setText("");
+        
+        String name = nameField.getText();
         int age = 0;
-        //will fix logic later
+        
         try
         {
              age = Integer.parseInt(ageField.getText().trim());
+             if(age <= 0 || age >120)
+             {
+                 createLabel.setText("Please enter a valid age");
+                 return;
+             }
         }
-        catch(NumberFormatException g)
+        catch(NumberFormatException ex)
         {
             System.err.println("User didnt input a number");
         }
+        
+        if(name.isEmpty())
+        {
+            createLabel.setText("username is empty");
+            return;
+        }
+        if(name.contains(" "))
+        {
+            createLabel.setText("username may not contain spaces");
+            return;
+        }
         boolean isStudent = studentCheckBox.isSelected();
         
-        //test
-        String testMessage = String.format("testing storage \nName: %s \nAge: %d \nStudent: %b", name, age, isStudent);
+        newUser = null;
+        int newUserId;
         
-        JOptionPane.showMessageDialog(this, testMessage);
+        try
+        {
+            newUserId = this.userManager.newUserID();
+        }
+        catch(SQLException ex)
+        {
+            createLabel.setText("No valid ID's");
+            System.err.println("DB id retrieval error" + ex);
+            return;
+        }
+        
+        if(isStudent)
+        {
+            newUser = new Student(newUserId, name);
+        }
+        else if(age < 18)
+        {
+            newUser = new Child(newUserId, name);
+        }
+        else
+        {
+            newUser = new Adult(newUserId, name);
+        }
+        
+        try
+        {
+            if(userManager.addUser(newUser))
+            {
+                displayWindow.setCurrentUser(newUser);
+                displayWindow.showPanel(guiWindow.CHOICE_PANEL);
+            }
+            else
+            {
+                createLabel.setText("Username already exists");
+            }
+        }
+        catch(SQLException ex)
+        {
+            createLabel.setText("Couldn't find user table");
+        }        
     }
 }
