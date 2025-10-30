@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Thu Oct 30 22:10:11 NZDT 2025:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-019a-3461-b9cc-00000f58e9b8 
-on database directory C:\Users\GGPC\Documents\NetBeansProjects\SoftCon\SoftwareConstructionAss2\SoftConDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@70dea4e 
-Loaded from file:/C:/Users/GGPC/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+Thu Oct 30 22:12:19 NZDT 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-019a-3463-acb6-00001f400000 
+on database directory W:\Repo\SoftCon\SoftwareConstructionAss2\SoftConDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@70dea4e 
+Loaded from file:/C:/Users/Prize/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
-java.runtime.version=21.0.8+12-LTS-250
-user.dir=C:\Users\GGPC\Documents\NetBeansProjects\SoftCon\SoftwareConstructionAss2
+java.runtime.version=21.0.7+8-LTS-245
+user.dir=W:\Repo\SoftCon\SoftwareConstructionAss2
 os.name=Windows 11
 os.arch=amd64
 os.version=10.0
