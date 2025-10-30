@@ -16,7 +16,7 @@ public class VenueManager {
     
     public void createVenueTable() throws SQLException{
         try (Statement stmt = DBManage.conn.createStatement()) {
-            stmt.executeUpdate("CREATE TABLE GWYN(ROWS int, COL1 BOOLEAN,  COL2 BOOLEAN, COL3 BOOLEAN))");
+            stmt.executeUpdate("CREATE TABLE GWYN(SEATROWS int, C1 BOOLEAN,  C2 BOOLEAN, C3 BOOLEAN)");
 //            stmt.executeUpdate("CREATE TABLE VERSO(ROWS, COL1,  COL2, COL3, COL4, COL5))");
 //            stmt.executeUpdate("CREATE TABLE LUCY(ROWS, COL1,  COL2, COL3, COL4, COL5, COL6, COL7))");
             System.out.println("Venue Table created.");
@@ -33,8 +33,20 @@ public class VenueManager {
     
     public void populateTable(String venue) throws SQLException{
         try (Statement stmt = DBManage.conn.createStatement()) {
-            for(int i = 1; i < 3; i++){
-                stmt.executeUpdate("INSERT INTO " + venue + " VALUES (" + i + ", false, fasle, false)");
+            for(int i = 1; i <= 3; i++){
+                stmt.executeUpdate("INSERT INTO GWYN VALUES (" + i + ", false, false, false)");
+                System.out.println("inserted row: " + i);
+            }
+            System.out.println("Venue Table populated.");
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+    
+    public void getVenue(String venue) throws SQLException{
+        try (Statement stmt = DBManage.conn.createStatement()) {
+            for(int i = 1; i <= 3; i++){
+                stmt.executeUpdate("SELECT * FROM GWYN");
                 System.out.println("inserted row: " + i);
             }
             System.out.println("Venue Table populated.");
@@ -53,9 +65,9 @@ public class VenueManager {
         }
         
         try{
-            vm.createVenueTable();
+            vm.populateTable("GWYN");
         } catch(SQLException e) {
-            System.out.println("venue table failed to create" + e);
+            System.out.println("failed to add row" + e);
         }
     }
 }

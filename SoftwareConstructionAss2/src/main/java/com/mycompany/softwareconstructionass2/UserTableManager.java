@@ -148,7 +148,6 @@ public class UserTableManager {
     
     public int newUserID() throws SQLException{
         try (Statement stmt = DBManage.conn.createStatement()) {
-            //deletes user and also deletes all their tickets from the other table, idk if you can clear the thing i can change it if you want
             ResultSet RS = stmt.executeQuery("SELECT MAX(USER_ID) FROM USERS");
             System.out.println("User ID Found");
             RS.next();
@@ -159,6 +158,8 @@ public class UserTableManager {
             throw e;
         }   
     }
+    
+    
     
     public void deleteUser(int userID) throws SQLException{
         try (Statement stmt = DBManage.conn.createStatement()) {
@@ -171,15 +172,6 @@ public class UserTableManager {
     }
     
     public void deleteEverythingUser() throws SQLException {
-        try(Statement stmt = DBManage.conn.createStatement()){
-            stmt.executeUpdate("DELETE FROM USERS");
-            System.out.println("successfully deleted everyrthing from user");
-        } catch (SQLException e) {
-            throw e;
-        }   
-    }
-    
-    public void newID() throws SQLException {
         try(Statement stmt = DBManage.conn.createStatement()){
             stmt.executeUpdate("DELETE FROM USERS");
             System.out.println("successfully deleted everyrthing from user");
@@ -212,6 +204,12 @@ public class UserTableManager {
             testit.deleteEverythingTicket();
         } catch(SQLException e) {
             System.out.println("failed to delete everything " + e);
+        }
+        
+        try{
+            test.newUserID();
+        } catch (SQLException e) {
+            System.out.println("failed to get new highest user id");
         }
         try{
             if(test.addUser(tester2)){
@@ -250,11 +248,7 @@ public class UserTableManager {
             System.out.println("failed to get ticket");
         }
         
-        try{
-            test.newUserID();
-        } catch (SQLException e) {
-            System.out.println("failed to get new highest user id");
-        }
+        
             
     }
 }
