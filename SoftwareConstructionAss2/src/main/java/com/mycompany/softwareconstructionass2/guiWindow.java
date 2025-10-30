@@ -66,7 +66,7 @@ public class guiWindow extends JFrame
         loginPanel.setPreferredSize(PanelSize);        
         mainCard.add(loginPanel, LOGIN_PANEL);
         
-        NewUserPanel newUserPanel = new NewUserPanel(this);
+        NewUserPanel newUserPanel = new NewUserPanel(this, this.userManager);
         newUserPanel.setPreferredSize(PanelSize);        
         mainCard.add(newUserPanel, NEW_USER_PANEL);        
         
