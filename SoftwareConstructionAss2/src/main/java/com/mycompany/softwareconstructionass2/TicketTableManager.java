@@ -39,10 +39,10 @@ public class TicketTableManager {
         try (PreparedStatement pstmt = DBManage.conn.prepareStatement(sql);) {
             pstmt.setString(1, ticket.getTicketID());
             pstmt.setInt(2, ticket.getUserID());
-            pstmt.setString(3, ticket.getSeat());
-            pstmt.setString(4, ticket.getVenue());
+            pstmt.setString(3, ticket.getVenue());
+            pstmt.setString(4, ticket.getSeat());
             pstmt.executeUpdate();
-            System.out.println("User added sucessfully");
+            System.out.println("Ticket added sucessfully");
         } catch (SQLException e) {
             throw e;
         }   
