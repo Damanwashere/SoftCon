@@ -1,15 +1,8 @@
 ----------------------------------------------------------------
-<<<<<<< HEAD
-Thu Oct 30 22:12:19 NZDT 2025:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-019a-3463-acb6-00001f400000 
+Fri Oct 31 01:52:50 NZDT 2025:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-019a-352d-9311-00001f785150 
 on database directory W:\Repo\SoftCon\SoftwareConstructionAss2\SoftConDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@70dea4e 
 Loaded from file:/C:/Users/Prize/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
-=======
-Fri Oct 31 00:11:09 NZDT 2025:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-019a-34d0-7a8c-00000f58d6c8 
-on database directory C:\Users\GGPC\Documents\NetBeansProjects\SoftCon\SoftwareConstructionAss2\SoftConDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@70dea4e 
-Loaded from file:/C:/Users/GGPC/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
->>>>>>> 9a3aaa4b2813d70237478b052ab7eadb43769b8b
 java.vendor=Oracle Corporation
 java.runtime.version=21.0.7+8-LTS-245
 user.dir=W:\Repo\SoftCon\SoftwareConstructionAss2
@@ -18,3 +11,34 @@ os.arch=amd64
 os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
+Fri Oct 31 01:52:50 NZDT 2025 Thread[#1,main,5,main] (XID = 1316), (SESSIONID = 1), (DATABASE = SoftConDB), (DRDAID = null), Cleanup action starting
+Fri Oct 31 01:52:50 NZDT 2025 Thread[#1,main,5,main] (XID = 1316), (SESSIONID = 1), (DATABASE = SoftConDB), (DRDAID = null), Failed Statement is: DELETE FROM USERS
+java.lang.NullPointerException: Cannot invoke "String.length()" because "s" is null
+	at java.base/java.io.StringReader.<init>(StringReader.java:50)
+	at org.apache.derby.impl.services.uuid.BasicUUID.<init>(Unknown Source)
+	at org.apache.derby.impl.services.uuid.BasicUUIDFactory.recreateUUID(Unknown Source)
+	at org.apache.derby.impl.sql.catalog.SYSTABLESRowFactory.buildDescriptorBody(Unknown Source)
+	at org.apache.derby.impl.sql.catalog.SYSTABLESRowFactory.buildDescriptor(Unknown Source)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.getDescriptorViaIndexMinion(Unknown Source)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.getDescriptorViaIndex(Unknown Source)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.getTableDescriptorIndex1Scan(Unknown Source)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.getUncachedTableDescriptor(Unknown Source)
+	at org.apache.derby.impl.sql.catalog.NameTDCacheable.setIdentity(Unknown Source)
+	at org.apache.derby.impl.services.cache.ConcurrentCache.find(Unknown Source)
+	at org.apache.derby.impl.sql.catalog.DataDictionaryImpl.getTableDescriptor(Unknown Source)
+	at org.apache.derby.impl.sql.compile.QueryTreeNode.getTableDescriptor(Unknown Source)
+	at org.apache.derby.impl.sql.compile.FromBaseTable.bindTableDescriptor(Unknown Source)
+	at org.apache.derby.impl.sql.compile.FromBaseTable.bindNonVTITables(Unknown Source)
+	at org.apache.derby.impl.sql.compile.FromList.bindTables(Unknown Source)
+	at org.apache.derby.impl.sql.compile.SelectNode.bindNonVTITables(Unknown Source)
+	at org.apache.derby.impl.sql.compile.DMLStatementNode.bindTables(Unknown Source)
+	at org.apache.derby.impl.sql.compile.DeleteNode.bindStatement(Unknown Source)
+	at org.apache.derby.impl.sql.GenericStatement.prepMinion(Unknown Source)
+	at org.apache.derby.impl.sql.GenericStatement.prepare(Unknown Source)
+	at org.apache.derby.impl.sql.conn.GenericLanguageConnectionContext.prepareInternalStatement(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedStatement.execute(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedStatement.executeLargeUpdate(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedStatement.executeUpdate(Unknown Source)
+	at com.mycompany.softwareconstructionass2.UserTableManager.deleteEverythingUser(UserTableManager.java:177)
+	at com.mycompany.softwareconstructionass2.UserTableManager.main(UserTableManager.java:202)
+Cleanup action completed

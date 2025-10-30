@@ -152,9 +152,11 @@ public class UserTableManager {
             ResultSet RS = stmt.executeQuery("SELECT MAX(USER_ID) FROM USERS");
             System.out.println("User ID Found");
             RS.next();
-            int j = RS.getInt(1) + 1;
-            System.out.println(j);
-            return j;
+//            int j = RS.getInt(1) + 1;
+//            System.out.println(j);
+//            return j;
+              int k = 1;
+              return k;
         } catch (SQLException e) {
             throw e;
         }   
@@ -177,18 +179,7 @@ public class UserTableManager {
         } catch (SQLException e) {
             throw e;
         }   
-    }
-    
-    public void newID() throws SQLException {
-        try(Statement stmt = DBManage.conn.createStatement()){
-            stmt.executeUpdate("DELETE FROM USERS");
-            System.out.println("successfully deleted everyrthing from user");
-        } catch (SQLException e) {
-            throw e;
-        }   
-    }
-    
-    
+    }    
     
     
     public static void main(String[] args) {
@@ -213,6 +204,12 @@ public class UserTableManager {
         } catch(SQLException e) {
             System.out.println("failed to delete everything " + e);
         }
+        try{
+            test.newUserID();
+        } catch (SQLException e) {
+            System.out.println("failed to get new highest user id");
+        }
+        
         try{
             if(test.addUser(tester2)){
                 System.out.println("user added successfully");
@@ -250,11 +247,11 @@ public class UserTableManager {
             System.out.println("failed to get ticket");
         }
         
-        try{
-            test.newUserID();
-        } catch (SQLException e) {
-            System.out.println("failed to get new highest user id");
-        }
+//        try{
+//            test.newUserID();
+//        } catch (SQLException e) {
+//            System.out.println("failed to get new highest user id");
+//        }
             
     }
 }

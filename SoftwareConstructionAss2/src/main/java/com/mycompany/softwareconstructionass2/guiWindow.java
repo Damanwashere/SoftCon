@@ -40,12 +40,12 @@ public class guiWindow extends JFrame
         this.userManager = new UserTableManager();
         
         //testing my login panel
-        UserData testUser = new Adult(1, "John");
+//        UserData testUser = new Adult(1, "John");
 //        UserData test1User = new Student(2, "Zoey");
         try
         {
             this.userManager.createUserTable();
-            this.userManager.addUser(testUser);
+//            this.userManager.addUser(testUser);
 //            userManager.addUser(test1User);
 
             if(this.userManager.getdbManager().conn != null)
@@ -66,7 +66,7 @@ public class guiWindow extends JFrame
         loginPanel.setPreferredSize(PanelSize);        
         mainCard.add(loginPanel, LOGIN_PANEL);
         
-        NewUserPanel newUserPanel = new NewUserPanel(this);
+        NewUserPanel newUserPanel = new NewUserPanel(this, this.userManager);
         newUserPanel.setPreferredSize(PanelSize);        
         mainCard.add(newUserPanel, NEW_USER_PANEL);        
         
