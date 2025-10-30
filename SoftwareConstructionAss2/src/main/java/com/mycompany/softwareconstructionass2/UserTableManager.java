@@ -148,7 +148,6 @@ public class UserTableManager {
     
     public int newUserID() throws SQLException{
         try (Statement stmt = DBManage.conn.createStatement()) {
-            //deletes user and also deletes all their tickets from the other table, idk if you can clear the thing i can change it if you want
             ResultSet RS = stmt.executeQuery("SELECT MAX(USER_ID) FROM USERS");
             System.out.println("User ID Found");
             RS.next();
@@ -161,6 +160,8 @@ public class UserTableManager {
             throw e;
         }   
     }
+    
+    
     
     public void deleteUser(int userID) throws SQLException{
         try (Statement stmt = DBManage.conn.createStatement()) {
@@ -179,7 +180,13 @@ public class UserTableManager {
         } catch (SQLException e) {
             throw e;
         }   
+<<<<<<< HEAD
     }    
+=======
+    }
+    
+    
+>>>>>>> main
     
     
     public static void main(String[] args) {
@@ -203,6 +210,12 @@ public class UserTableManager {
             testit.deleteEverythingTicket();
         } catch(SQLException e) {
             System.out.println("failed to delete everything " + e);
+        }
+        
+        try{
+            test.newUserID();
+        } catch (SQLException e) {
+            System.out.println("failed to get new highest user id");
         }
         try{
             test.newUserID();
@@ -247,11 +260,15 @@ public class UserTableManager {
             System.out.println("failed to get ticket");
         }
         
+<<<<<<< HEAD
 //        try{
 //            test.newUserID();
 //        } catch (SQLException e) {
 //            System.out.println("failed to get new highest user id");
 //        }
+=======
+        
+>>>>>>> main
             
     }
 }
