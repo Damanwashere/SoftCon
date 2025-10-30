@@ -9,8 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  *
@@ -48,9 +46,22 @@ public class UserTableManager {
     }
     
     //when using this function you will need a try catch case for the sql exception that prints the error
-    public void addUser(UserData user) throws SQLException
+    public boolean addUser(UserData user) throws SQLException
     {
         Connection conn = this.DBManage.conn;
+        ResultSet RS;
+        try (Statement stmt = conn.createStatement()) {
+            RS = stmt.executeQuery("SELECT NAME FROM USERS where NAME = '" + user.getName() + "'");
+            if(RS.next()){
+                return false;
+            }
+            System.out.println("user check successful");
+        } catch (SQLException e) {
+            System.out.println("user check failed");
+            System.out.println(e);
+        }
+        
+        
         
         String discount = user.getClass().getSimpleName();
         try (Statement stmt = conn.createStatement()) {
@@ -58,7 +69,8 @@ public class UserTableManager {
             System.out.println("User added sucessfully");
         } catch (SQLException e) {
             throw e;
-        }   
+        }
+        return true;
     }
         //failing all my panel login tests
 //    public UserData getUser(String userName) throws SQLException
@@ -134,6 +146,20 @@ public class UserTableManager {
         }
     }
     
+    public int newUserID() throws SQLException{
+        try (Statement stmt = DBManage.conn.createStatement()) {
+            //deletes user and also deletes all their tickets from the other table, idk if you can clear the thing i can change it if you want
+            ResultSet RS = stmt.executeQuery("SELECT MAX(USER_ID) FROM USERS");
+            System.out.println("User ID Found");
+            RS.next();
+            int j = RS.getInt(1) + 1;
+            System.out.println(j);
+            return j;
+        } catch (SQLException e) {
+            throw e;
+        }   
+    }
+    
     public void deleteUser(int userID) throws SQLException{
         try (Statement stmt = DBManage.conn.createStatement()) {
             //deletes user and also deletes all their tickets from the other table, idk if you can clear the thing i can change it if you want
@@ -169,11 +195,12 @@ public class UserTableManager {
         UserTableManager test = new UserTableManager();
         TicketTableManager testit = new TicketTableManager();
         Adult tester = new Adult(1, "testing");
+        Adult tester2 = new Adult(33, "testing2");
         Ticket test1 = new Ticket("11", 1, "venue", "seat");
-        Ticket test2 = new Ticket("12", 1, "here", "also here");
-        Ticket test3 = new Ticket("13", 11, "here", "also here");
-        Ticket test4 = new Ticket("14", 1, "here", "also here");
-        Ticket test5 = new Ticket("15", 4, "here", "also here");
+        Ticket test2 = new Ticket("12", 1, "venue 2", "seat");
+        Ticket test3 = new Ticket("13", 11, "venue 3", "seat");
+        Ticket test4 = new Ticket("14", 1, "venue 4", "seat");
+        Ticket test5 = new Ticket("15", 4, "venue 5", "seat");
         try{
             test.createUserTable();
             testit.createTicketTable();
@@ -187,7 +214,16 @@ public class UserTableManager {
             System.out.println("failed to delete everything " + e);
         }
         try{
-            test.addUser(tester);
+            if(test.addUser(tester2)){
+                System.out.println("user added successfully");
+            } else {
+                System.out.println("user already exists");
+            }
+            if(test.addUser(tester)){
+                System.out.println("user added successfully");
+            } else {
+                System.out.println("user already exists");
+            }
         } catch (SQLException e) {
             System.out.println("something went wrong with adding the user");
         }
@@ -203,7 +239,7 @@ public class UserTableManager {
         }
         
         try{
-            test.getUser("testing");
+            test.getUser("testing3");
         } catch (SQLException e) {
             System.out.println("User does not exist");
         }
@@ -212,6 +248,12 @@ public class UserTableManager {
             testit.getTickets(1);
         } catch (SQLException e) {
             System.out.println("failed to get ticket");
+        }
+        
+        try{
+            test.newUserID();
+        } catch (SQLException e) {
+            System.out.println("failed to get new highest user id");
         }
             
     }
