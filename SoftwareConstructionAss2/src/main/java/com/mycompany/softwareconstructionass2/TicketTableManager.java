@@ -4,6 +4,7 @@
  */
 package com.mycompany.softwareconstructionass2;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,8 +35,13 @@ public class TicketTableManager {
     
     //using a ticket object 
     public void addTicket(Ticket ticket) throws SQLException{
-        try (Statement stmt = DBManage.conn.createStatement()) {
-            stmt.executeUpdate("INSERT INTO TICKET VALUES ('" + ticket.getTicketID() + "', " + ticket.getUserID() + ", '" + ticket.getSeat() + "', '" + ticket.getVenue() + "')");
+        String sql = "INSERT INTO TICKET (TICKET_ID, USER_ID, VENUE, SEAT) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement pstmt = DBManage.conn.prepareStatement(sql);) {
+            pstmt.setString(1, ticket.getTicketID());
+            pstmt.setInt(2, ticket.getUserID());
+            pstmt.setString(3, ticket.getSeat());
+            pstmt.setString(4, ticket.getVenue());
+            pstmt.executeUpdate();
             System.out.println("User added sucessfully");
         } catch (SQLException e) {
             throw e;
@@ -50,7 +56,7 @@ public class TicketTableManager {
                 System.out.println(current);
                 tickets.add(current);
             }
-            System.out.println("Ticket/s retrieved sucessfully");
+            System.out.println("Ticket/s retrieved sucessfully: " + tickets);
         } catch (SQLException e) {
             throw e;
         }   

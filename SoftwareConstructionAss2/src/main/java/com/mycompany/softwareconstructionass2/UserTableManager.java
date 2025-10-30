@@ -153,56 +153,66 @@ public class UserTableManager {
         }   
     }
     
+    public void newID() throws SQLException {
+        try(Statement stmt = DBManage.conn.createStatement()){
+            stmt.executeUpdate("DELETE FROM USERS");
+            System.out.println("successfully deleted everyrthing from user");
+        } catch (SQLException e) {
+            throw e;
+        }   
+    }
     
     
     
-//    public static void main(String[] args) {
-//        UserTableManager test = new UserTableManager();
-//        Adult tester = new Adult(1, "testing");
-//        Ticket test1 = new Ticket("11", 1, "here", "also here");
-//        Ticket test2 = new Ticket("12", 1, "here", "also here");
-//        Ticket test3 = new Ticket("13", 11, "here", "also here");
-//        Ticket test4 = new Ticket("14", 1, "here", "also here");
-//        Ticket test5 = new Ticket("15", 4, "here", "also here");
-//        try{
-//            test.createUserTable();
-//            test.createTicketTable();
-//        } catch(SQLException e) {
-//            System.out.println("something went wrong in table creation thats not table does not exist" + e);
-//        }
-//        try{
-//            test.deleteEverythingUser();
-//            test.deleteEverythingTicket();
-//        } catch(SQLException e) {
-//            System.out.println("failed to delete everything " + e);
-//        }
-//        try{
-//            test.addUser(tester);
-//        } catch (SQLException e) {
-//            System.out.println("something went wrong with adding the user");
-//        }
-//        
-//        try{
-//            test.addTicket(test1);
-//            test.addTicket(test2);
-//            test.addTicket(test3);
-//            test.addTicket(test4);
-//            test.addTicket(test5);
-//        } catch (SQLException e) {
-//            System.out.println("something went wrong with adding the tickets");
-//        }
-//        
-//        try{
-//            test.getUser("testing");
-//        } catch (SQLException e) {
-//            System.out.println("User does not exist");
-//        }
-//        
-//        try{
-//            test.getTickets(1);
-//        } catch (SQLException e) {
-//            System.out.println("failed to get ticket");
-//        }
-//            
-//    }
+    
+    public static void main(String[] args) {
+        UserTableManager test = new UserTableManager();
+        TicketTableManager testit = new TicketTableManager();
+        Adult tester = new Adult(1, "testing");
+        Ticket test1 = new Ticket("11", 1, "venue", "seat");
+        Ticket test2 = new Ticket("12", 1, "here", "also here");
+        Ticket test3 = new Ticket("13", 11, "here", "also here");
+        Ticket test4 = new Ticket("14", 1, "here", "also here");
+        Ticket test5 = new Ticket("15", 4, "here", "also here");
+        try{
+            test.createUserTable();
+            testit.createTicketTable();
+        } catch(SQLException e) {
+            System.out.println("something went wrong in table creation thats not table does not exist" + e);
+        }
+        try{
+            test.deleteEverythingUser();
+            testit.deleteEverythingTicket();
+        } catch(SQLException e) {
+            System.out.println("failed to delete everything " + e);
+        }
+        try{
+            test.addUser(tester);
+        } catch (SQLException e) {
+            System.out.println("something went wrong with adding the user");
+        }
+        
+        try{
+            testit.addTicket(test1);
+            testit.addTicket(test2);
+            testit.addTicket(test3);
+            testit.addTicket(test4);
+            testit.addTicket(test5);
+        } catch (SQLException e) {
+            System.out.println("something went wrong with adding the tickets" + e);
+        }
+        
+        try{
+            test.getUser("testing");
+        } catch (SQLException e) {
+            System.out.println("User does not exist");
+        }
+        
+        try{
+            testit.getTickets(1);
+        } catch (SQLException e) {
+            System.out.println("failed to get ticket");
+        }
+            
+    }
 }
