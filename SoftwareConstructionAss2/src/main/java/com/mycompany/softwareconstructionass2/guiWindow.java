@@ -17,6 +17,7 @@ public class guiWindow extends JFrame
     private CardLayout panelLayout = new CardLayout();
     private JPanel mainCard = new JPanel(panelLayout);
     private ChoicePanel choicePanel;
+    private VenueAPanel aVenuePanel;
     
     final static String INITIAL_PANEL = "start panel";
     final static String LOGIN_PANEL = "user login";
@@ -30,15 +31,17 @@ public class guiWindow extends JFrame
     
     private UserData currentUser;
     private UserTableManager userManager;
+    private VenueManager venueManager;
     
     private static final Dimension PanelSize = new Dimension(1000, 500);
-    final boolean[][] testSeats = testMatrix.test_matrix;
+    private boolean[][] testSeats;
     
     public guiWindow(String name)
     {
         super(name);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.userManager = new UserTableManager();
+        this.venueManager = new VenueManager();
         
         //testing my login panel
 //        UserData testUser = new Adult(1, "John");
@@ -75,7 +78,7 @@ public class guiWindow extends JFrame
         choicePanel.setPreferredSize(PanelSize);
         mainCard.add(choicePanel, CHOICE_PANEL);
         
-        PurchasePanel purchasePanel = new PurchasePanel(this);
+        PurchasePanel purchasePanel = new PurchasePanel(this, this.venueManager);
         purchasePanel.setPreferredSize(PanelSize);
         mainCard.add(purchasePanel, PURCHASE_PANEL);
         
@@ -83,7 +86,7 @@ public class guiWindow extends JFrame
         ticketPanel.setPreferredSize(PanelSize);
         mainCard.add(ticketPanel, TICKET_PANEL);
         
-        VenueAPanel aVenuePanel = new VenueAPanel(this, testSeats);
+        this.aVenuePanel = new VenueAPanel(this);
         aVenuePanel.setPreferredSize(PanelSize);
         mainCard.add(aVenuePanel, VENUE_A_PANEL);
         
@@ -112,6 +115,10 @@ public class guiWindow extends JFrame
         {
             this.choicePanel.updateCurrentUser(this.getCurrentUser());
         }
+        if(panelName.equals(guiWindow.VENUE_A_PANEL))
+        {
+            this.aVenuePanel.updatePanel(this.getVenueSeats());
+        }
     }
     
     public void setCurrentUser(UserData user)
@@ -127,6 +134,26 @@ public class guiWindow extends JFrame
     public UserTableManager getUserManager()
     {
         return this.userManager;
+    }
+    
+    public void setVenueManager(VenueManager venue)
+    {
+        this.venueManager = venue;
+    }
+    
+    public VenueManager getVenueManager()
+    {
+        return this.venueManager;
+    }
+    
+    public void setVenueSeats(boolean[][] seats)
+    {
+        this.testSeats = seats;
+    }
+    
+    public boolean[][] getVenueSeats()
+    {
+        return this.testSeats;
     }
     
     public void logout()

@@ -13,12 +13,16 @@ import java.awt.*;
 public class VenueAPanel extends JPanel
 {
     private guiWindow displayWindow;
-    private final boolean[][] seats;
+    JPanel seatPanel;
+    private boolean[][] seats =
+    {
+        {true, false},
+        {false, true}
+    };
     
-    VenueAPanel(guiWindow window, boolean[][] test)
+    VenueAPanel(guiWindow window)
     {
         this.displayWindow = window;
-        this.seats = test;       
         
         int rows = seats.length;        
         //practicinmg ternary operator
@@ -27,7 +31,46 @@ public class VenueAPanel extends JPanel
         this.setLayout(new BorderLayout(5, 5));
         //test variables for now
         
-        JPanel seatPanel = new JPanel(new GridLayout(rows, cols, 10, 10));
+        this.seatPanel = new JPanel(new GridLayout(rows, cols, 10, 10));        
+        seatSetup();
+        
+        this.add(seatPanel, BorderLayout.CENTER);
+        
+        //copy and pasting my return from LoginPanel, will check if this can just be a function later, but idk
+        JPanel exitPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton returnButton = new JButton("Logout");
+        returnButton.setPreferredSize(new Dimension(150, 25));
+        returnButton.addActionListener(e ->
+        {
+        displayWindow.showPanel(guiWindow.INITIAL_PANEL);
+        });
+        exitPanel.add(returnButton);
+        
+        this.add(exitPanel, BorderLayout.SOUTH);
+        
+    }
+
+    public void updatePanel(boolean[][] seat)
+    {
+        this.seats = seat;
+        seatSetup();
+        this.revalidate();
+        this.repaint();
+    }
+    
+    //needed function to update outside of panel logic
+    private void seatSetup()
+    {
+        this.seatPanel.removeAll();
+        
+        int rows = seats.length;        
+        //practicinmg ternary operator
+        int cols = (rows > 0) ? seats[0].length : 0;
+        
+        this.setLayout(new BorderLayout(5, 5));
+        //test variables for now
+        
+        this.seatPanel.setLayout(new GridLayout(rows, cols, 10, 10));
         
         for(int i = 0; i < rows; i++)
         {
@@ -54,19 +97,6 @@ public class VenueAPanel extends JPanel
                 
                 seatPanel.add(seat);
             }
-            this.add(seatPanel, BorderLayout.CENTER);
-        
-            //copy and pasting my return from LoginPanel, will check if this can just be a function later, but idk
-            JPanel exitPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-            JButton returnButton = new JButton("Logout");
-            returnButton.setPreferredSize(new Dimension(150, 25));
-            returnButton.addActionListener(e ->
-            {
-            displayWindow.showPanel(guiWindow.INITIAL_PANEL);
-            });
-            exitPanel.add(returnButton);
-        
-            this.add(exitPanel, BorderLayout.SOUTH);
         }
-    }    
+    }
 }

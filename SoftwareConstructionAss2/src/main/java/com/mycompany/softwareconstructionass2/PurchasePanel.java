@@ -6,6 +6,7 @@ package com.mycompany.softwareconstructionass2;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 /**
  *
@@ -14,10 +15,13 @@ import java.awt.*;
 public class PurchasePanel extends JPanel
 {
     private guiWindow displayWindow;
+    private VenueManager venueSelect;
+    private boolean[][] testM = testMatrix.test_matrix;
     
-    PurchasePanel(guiWindow window)
+    PurchasePanel(guiWindow window, VenueManager venue)
     {
         this.displayWindow = window;
+        this.venueSelect = venue;
         this.setLayout(new BorderLayout(20, 20));
         
         //reused code from choice
@@ -36,6 +40,21 @@ public class PurchasePanel extends JPanel
         aVenueButton.setPreferredSize(new Dimension(200, 100));
         aVenueButton.addActionListener(e ->
         {
+            //test case in meantime
+            boolean[][] venueSeats = testM;
+            //waiting for db
+//            try
+//            {
+//                waiting for fix
+//                boolean[][] venueSeats = venueSelect.getVenue("GWYN");
+//                
+//                
+//            }
+//            catch(SQLException ex)
+//            {
+//                System.err.println("problem getting venue seats");
+//            }
+            displayWindow.setVenueSeats(venueSeats);
             displayWindow.showPanel(guiWindow.VENUE_A_PANEL);
         });
         cons.insets = new Insets(5, 5, 5, 25);
@@ -75,7 +94,7 @@ public class PurchasePanel extends JPanel
         returnButton.setPreferredSize(new Dimension(150, 25));
         returnButton.addActionListener(e ->
         {
-           displayWindow.showPanel(guiWindow.INITIAL_PANEL);
+           displayWindow.logout();
         });
         exitPanel.add(returnButton);
         

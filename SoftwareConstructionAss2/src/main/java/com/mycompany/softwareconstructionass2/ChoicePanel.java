@@ -32,7 +32,7 @@ public class ChoicePanel extends JPanel
         messageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         messageLabel.setBorder(BorderFactory.createEmptyBorder(25, 0, 10, 0));
         
-        userLabel.setText(" a");
+        userLabel.setText(" test");
         userLabel.setFont(new Font("Monospaced", Font.PLAIN, 24));
         userLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         userLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 25, 0));
