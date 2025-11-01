@@ -18,6 +18,7 @@ public class PurchasePanel extends JPanel
     private VenueManager venueSelect;
     private boolean[][] testM = testMatrix.test_matrix;
     boolean[][] venueSeats;
+    private String venueName = ""; 
     
     PurchasePanel(guiWindow window, VenueManager venue)
     {
@@ -40,21 +41,18 @@ public class PurchasePanel extends JPanel
         JButton aVenueButton = new JButton("Gwyn's Arena");        
         aVenueButton.setPreferredSize(new Dimension(200, 100));
         aVenueButton.addActionListener(e ->
-        {
-            //test case in meantime
-//            boolean[][] venueSeats = testM;
-//            waiting for db
+        {    
+            venueName = "GWYN";
             try
             {
-//                waiting for fix
-                venueSeats = venueSelect.getVenue("GWYN");                
-                
+                venueSeats = venueSelect.getVenue(venueName);
             }
             catch(SQLException ex)
             {
                 System.err.println("problem getting venue seats");
             }
             displayWindow.setVenueSeats(venueSeats);
+            venueName = "";
             displayWindow.showPanel(guiWindow.VENUE_A_PANEL);
         });
         cons.insets = new Insets(5, 5, 5, 25);
@@ -66,8 +64,21 @@ public class PurchasePanel extends JPanel
         JButton bVenueButton = new JButton("Verso's Concert Hall");
         bVenueButton.setPreferredSize(new Dimension(200, 100));
         bVenueButton.addActionListener(e ->
-        {
-            displayWindow.showPanel(guiWindow.VENUE_B_PANEL);
+        {    
+            venueName = "VERSO";
+            try
+            {
+
+                venueSeats = venueSelect.getVenue(venueName);                
+                
+            }
+            catch(SQLException ex)
+            {
+                System.err.println("problem getting venue seats");
+            }
+            displayWindow.setVenueSeats(venueSeats);
+            venueName = "";
+            displayWindow.showPanel(guiWindow.VENUE_A_PANEL);
         });
         cons.insets = new Insets(5, 25, 5, 25);
         cons.gridx = 1;
@@ -78,8 +89,19 @@ public class PurchasePanel extends JPanel
         JButton cVenueButton = new JButton("Lucy's Theatre");
         cVenueButton.setPreferredSize(new Dimension(200, 100));
         cVenueButton.addActionListener(e ->
-        {
-            displayWindow.showPanel(guiWindow.VENUE_C_PANEL);
+        {    
+            venueName = "LUCY";
+            try
+            {
+                venueSeats = venueSelect.getVenue(venueName);
+            }
+            catch(SQLException ex)
+            {
+                System.err.println("problem getting venue seats");
+            }
+            displayWindow.setVenueSeats(venueSeats);
+            venueName = "";
+            displayWindow.showPanel(guiWindow.VENUE_A_PANEL);
         });
         cons.insets = new Insets(5, 25, 5, 5);
         cons.gridx = 2;
@@ -99,5 +121,5 @@ public class PurchasePanel extends JPanel
         exitPanel.add(returnButton);
         
         this.add(exitPanel, BorderLayout.SOUTH);                
-    }    
+    }
 }
