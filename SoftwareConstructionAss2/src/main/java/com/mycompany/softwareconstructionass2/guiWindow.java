@@ -48,20 +48,13 @@ public class guiWindow extends JFrame
         this.userManager = new UserTableManager();
         this.venueManager = new VenueManager();
         this.ticketManager = new TicketTableManager();
-        
-        //testing my login panel
-//        UserData testUser = new Adult(1, "John");
-//        UserData test1User = new Student(2, "Zoey");
+        //setup for firstime if no db
         try
         {
-//            this.userManager.createUserTable();
-//            this.venueManager.deleteVenues();
-//            this.venueManager.createVenueTable();
-//            this.venueManager.populateTable();
-//            this.ticketManager.createTicketTable();
-//            this.userManager.addUser(testUser);
-//            userManager.addUser(test1User);
-
+            this.userManager.createUserTable();
+            this.venueManager.createVenueTable();
+            this.venueManager.populateTable();
+            this.ticketManager.createTicketTable();
             if(this.userManager.getdbManager().conn != null)
             {
                 this.userManager.getdbManager().conn.commit();
@@ -107,7 +100,7 @@ public class guiWindow extends JFrame
         
         panelLayout.show(mainCard, INITIAL_PANEL);
     }
-    
+    //switch between panels
     public void showPanel(String panelName)
     {
         panelLayout.show(mainCard, panelName);
@@ -127,6 +120,7 @@ public class guiWindow extends JFrame
         }
     }
     
+    //getters + setters
     public void setCurrentUser(UserData user)
     {
         this.currentUser = user;

@@ -189,11 +189,11 @@ public class UserTableManager {
         TicketTableManager testit = new TicketTableManager();
         Adult tester = new Adult(1, "testing");
         Adult tester2 = new Adult(33, "testing2");
-        Ticket test1 = new Ticket("11", 1, "venue", "seat");
-        Ticket test2 = new Ticket("12", 1, "venue 2", "seat");
-        Ticket test3 = new Ticket("13", 11, "venue 3", "seat");
-        Ticket test4 = new Ticket("14", 1, "venue 4", "seat");
-        Ticket test5 = new Ticket("15", 4, "venue 5", "seat");
+        Ticket test1 = new Ticket(11, 1, "venue", "seat");
+        Ticket test2 = new Ticket(12, 1, "venue 2", "seat");
+        Ticket test3 = new Ticket(13, 11, "venue 3", "seat");
+        Ticket test4 = new Ticket(14, 1, "venue 4", "seat");
+        Ticket test5 = new Ticket(15, 4, "venue 5", "seat");
         try{
             test.createUserTable();
             testit.createTicketTable();

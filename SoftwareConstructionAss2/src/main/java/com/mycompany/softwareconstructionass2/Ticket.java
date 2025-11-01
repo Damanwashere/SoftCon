@@ -10,12 +10,12 @@ package com.mycompany.softwareconstructionass2;
  */
 public class Ticket {
 
-    private String ticketID;
+    private int ticketID;
     private int userID;
     private String venue;
     private String seat;
     //ticket constructor with all the relavent information in it
-    public Ticket(String ticketID, int userID, String venue, String seat) {
+    public Ticket(int ticketID, int userID, String venue, String seat) {
         this.ticketID = ticketID;
         this.userID = userID;
         this.venue = venue;
@@ -25,7 +25,7 @@ public class Ticket {
     /**
      * @return the id
      */
-    public String getTicketID() {
+    public int getTicketID() {
         return ticketID;
     }
     /**
@@ -53,7 +53,7 @@ public class Ticket {
             return false;
         }
         Ticket test = (Ticket) obj;
-        return this.ticketID.equals(test.ticketID);
+        return this.ticketID == test.ticketID;
     }
     @Override
     // makes toString display some useful information instead of just some gibberish about its memory location

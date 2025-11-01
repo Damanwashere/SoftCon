@@ -18,12 +18,12 @@ public class ChoicePanel extends JPanel
     private JLabel userLabel = new JLabel();
     private JPanel userPanel;
     
+    //just a button select with logout
     ChoicePanel(guiWindow window)
     {
         this.displayWindow = window;
         this.setLayout(new BorderLayout(20, 20));
         
-        //will set this to output username in 
         this.userPanel = new JPanel();
         userPanel.setLayout(new BoxLayout(userPanel, BoxLayout.Y_AXIS));
         
@@ -83,7 +83,7 @@ public class ChoicePanel extends JPanel
         
         this.add(exitPanel, BorderLayout.SOUTH);
     }
-    
+    //need update since panels are initialised from start otherwise wea cant get username when login 
     public void updateCurrentUser(UserData userd)
     {
         UserData user = userd;

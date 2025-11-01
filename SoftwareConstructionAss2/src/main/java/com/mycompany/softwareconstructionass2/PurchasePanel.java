@@ -16,7 +16,12 @@ public class PurchasePanel extends JPanel
 {
     private guiWindow displayWindow;
     private VenueManager venueSelect;
-    private boolean[][] testM = testMatrix.test_matrix;
+    //preventing null on gui launch otherwise it'll be like no can do
+    private boolean[][] testM = 
+    {
+        {true, true},
+        {false, false}
+    };
     boolean[][] venueSeats;
     private String venueName = ""; 
     
@@ -25,8 +30,7 @@ public class PurchasePanel extends JPanel
         this.displayWindow = window;
         this.venueSelect = venue;
         this.setLayout(new BorderLayout(20, 20));
-        
-        //reused code from choice
+        //acting as a semi logo for us
         JLabel messageLabel = new JLabel("Group 105 Ticket Service");
         messageLabel.setFont(new Font("Monospaced", Font.BOLD, 28));
         messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -36,8 +40,7 @@ public class PurchasePanel extends JPanel
         
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints cons = new GridBagConstraints(); 
-        
-        //also reused from choice, just changing variables and positions
+        //buttons setting what venue is loaded and other variables needed in venueAPnael
         JButton aVenueButton = new JButton("Gwyn's Arena");        
         aVenueButton.setPreferredSize(new Dimension(200, 100));
         aVenueButton.addActionListener(e ->
@@ -117,7 +120,7 @@ public class PurchasePanel extends JPanel
         panel.add(cVenueButton, cons);
         
         this.add(panel, BorderLayout.CENTER);
-        
+        //user back or logout
         JPanel exitPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton returnButton = new JButton("Return to home");
         returnButton.setPreferredSize(new Dimension(150, 25));

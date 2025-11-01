@@ -58,7 +58,7 @@ public class TicketPanel extends JPanel
         
         this.add(exitPanel, BorderLayout.SOUTH);
     }
-    
+    //update for panel switch
     public void updateTickets()
     {
         ticketPanel.removeAll();
@@ -97,7 +97,7 @@ public class TicketPanel extends JPanel
         ticketPanel.revalidate();
         ticketPanel.repaint();        
     }
-    
+    //showing no tickets to the user if no tickets
     private void emptyTicketCase(String message)
     {
         JLabel noTicketsLabel = new JLabel(message, SwingConstants.CENTER);
@@ -107,7 +107,7 @@ public class TicketPanel extends JPanel
         panel.add(noTicketsLabel);
         ticketPanel.add(panel);
     }
-    
+    //adding tickets using panel to scroll and view accordingly
     private void addTicketToScroll(Ticket ticket)
     {
         JPanel ticketScroll = new JPanel();

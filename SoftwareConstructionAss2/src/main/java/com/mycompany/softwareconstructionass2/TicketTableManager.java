@@ -24,7 +24,12 @@ public class TicketTableManager {
     //when using this function you will need a try catch case for the sql exception that prints the error
     public void createTicketTable() throws SQLException{
         try (Statement stmt = DBManage.conn.createStatement()) {
-            stmt.executeUpdate("CREATE TABLE TICKET(TICKET_ID VARCHAR(10), USER_ID INT,  VENUE VARCHAR(50), SEAT VARCHAR(10))");
+            stmt.executeUpdate("CREATE TABLE TICKET("
+            + "TICKET_ID INT NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY, "
+            + "USER_ID INT, "
+            + "VENUE VARCHAR(50), "
+            + "Seat VARCHAR(10)"
+            +")");
             System.out.println("Venue Table created.");
         } catch (SQLException e) {
             if (e.getSQLState().equals("X0Y32")) {
@@ -39,7 +44,7 @@ public class TicketTableManager {
     public void addTicket(Ticket ticket) throws SQLException{
         String sql = "INSERT INTO TICKET (TICKET_ID, USER_ID, VENUE, SEAT) VALUES (?, ?, ?, ?)";
         try (PreparedStatement pstmt = DBManage.conn.prepareStatement(sql);) {
-            pstmt.setString(1, ticket.getTicketID());
+            pstmt.setInt(1, ticket.getTicketID());
             pstmt.setInt(2, ticket.getUserID());
             pstmt.setString(3, ticket.getVenue());
             pstmt.setString(4, ticket.getSeat());
@@ -67,7 +72,7 @@ public class TicketTableManager {
                 {
                     Ticket current = new Ticket
                     (
-                    rs.getString(1),
+                    rs.getInt(1),
                     rs.getInt(2),
                     rs.getString(3),
                     rs.getString(4)

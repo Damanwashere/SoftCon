@@ -109,7 +109,7 @@ public class VenueAPanel extends JPanel
         
         this.add(purchasePanel, BorderLayout.SOUTH);        
     } 
-    
+    //update panel as user back and forth
     public void updatePanel(boolean[][] seat, double disc, double updateToPrice, String updatevenue)
     {
         this.seats = seat;
@@ -220,12 +220,10 @@ public class VenueAPanel extends JPanel
             return;
         }
         int rows = seats.length;        
-        //practicinmg ternary operator
         int cols = (rows > 0) ? seats[0].length : 0;
         
         this.setLayout(new BorderLayout(5, 5));
-        //test variables for now
-        
+        //populate seats and dont allow uncheck of already purchase tickets
         this.seatPanel.setLayout(new GridLayout(rows, cols, 10, 10));
         
         for(int i = 0; i < rows; i++)

@@ -14,7 +14,7 @@ import java.awt.*;
 public class InitialPanel extends JPanel
 {
     private guiWindow displayWindow;
-    
+    //two buttons set for navigation, this is our starting point and where our logins will go
     public InitialPanel(guiWindow display)
     {
         this.displayWindow = display;        
