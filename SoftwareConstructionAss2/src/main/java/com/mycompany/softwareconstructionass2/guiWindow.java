@@ -39,7 +39,7 @@ public class guiWindow extends JFrame
     private boolean[][] testSeats;
     private double discount = 0.5;
     private double price = 1;
-    private String venue = "";
+    private String venue = "GWYN";
     
     public guiWindow(String name)
     {
@@ -55,7 +55,7 @@ public class guiWindow extends JFrame
         try
         {
             this.userManager.createUserTable();
-//            this.venueManager.deleteVenues();
+            this.venueManager.deleteVenues();
             this.venueManager.createVenueTable();
             this.venueManager.populateTable();
             this.ticketManager.createTicketTable();

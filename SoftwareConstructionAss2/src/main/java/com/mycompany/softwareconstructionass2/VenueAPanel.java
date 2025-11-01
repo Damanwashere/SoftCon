@@ -19,6 +19,7 @@ public class VenueAPanel extends JPanel
     private VenueManager venueManager;
     private String venue = "";
     private String venueTitle = "";
+    private JLabel venueLabel;
     JPanel seatPanel;
     private double price = 1.00;
     //initialise for null saftey
@@ -65,14 +66,13 @@ public class VenueAPanel extends JPanel
         
         this.setLayout(new BorderLayout(5, 5));
         
-        JLabel venueLabel = new JLabel(venueTitle, SwingConstants.CENTER);
+        venueLabel = new JLabel(venueTitle, SwingConstants.CENTER);
         venueLabel.setFont(new Font("Monospaced", Font.BOLD, 22));
-        venueLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+        venueLabel.setBorder(BorderFactory.createEmptyBorder(20, 0, 10, 0));
         
         this.add(venueLabel, BorderLayout.NORTH);
         
-        this.seatPanel = new JPanel(new GridLayout(rows, cols, 10, 10));        
-        seatSetup();
+        this.seatPanel = new JPanel(new GridLayout(rows, cols, 10, 10));
         
         this.add(seatPanel, BorderLayout.CENTER);
         
@@ -129,6 +129,7 @@ public class VenueAPanel extends JPanel
             default:
                 break;
         }
+        this.venueLabel.setText(this.venueTitle);
         seatSetup();
         this.revalidate();
         this.repaint();

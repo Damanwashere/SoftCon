@@ -118,7 +118,6 @@ public class VenueManager {
                     row[1] = RS.getBoolean(3);
                     row[2] = RS.getBoolean(4);
                     row[3] = RS.getBoolean(5);
-                    row[4] = RS.getBoolean(6);
                     rows.add(row);
                 }
                 array = rows.toArray(new boolean[rows.size()][]);
@@ -217,7 +216,7 @@ public class VenueManager {
         }
         try{
             boolean[][] array = vm.getVenue("LUCY");
-            for(int i = 0; i < 5; i++){
+            for(int i = 0; i < 4; i++){
                 for(int j = 0; j < 7; j++){
                     System.out.print("[" + array[i][j] + "]");
                 }

@@ -43,6 +43,7 @@ public class PurchasePanel extends JPanel
         aVenueButton.addActionListener(e ->
         {    
             venueName = "GWYN";
+            double price = 20.00;
             try
             {
                 venueSeats = venueSelect.getVenue(venueName);
@@ -53,6 +54,7 @@ public class PurchasePanel extends JPanel
             }
             displayWindow.setVenueSeats(venueSeats);
             displayWindow.setVenue(venueName);
+            displayWindow.setPrice(price);
             venueName = "";
             displayWindow.showPanel(guiWindow.VENUE_A_PANEL);
         });
@@ -67,11 +69,10 @@ public class PurchasePanel extends JPanel
         bVenueButton.addActionListener(e ->
         {    
             venueName = "VERSO";
+            double price = 50.00;
             try
             {
-
-                venueSeats = venueSelect.getVenue(venueName);                
-                
+                venueSeats = venueSelect.getVenue(venueName);
             }
             catch(SQLException ex)
             {
@@ -79,6 +80,7 @@ public class PurchasePanel extends JPanel
             }
             displayWindow.setVenueSeats(venueSeats);
             displayWindow.setVenue(venueName);
+            displayWindow.setPrice(price);
             venueName = "";
             displayWindow.showPanel(guiWindow.VENUE_A_PANEL);
         });
@@ -93,6 +95,7 @@ public class PurchasePanel extends JPanel
         cVenueButton.addActionListener(e ->
         {    
             venueName = "LUCY";
+            double price = 100.00;
             try
             {
                 venueSeats = venueSelect.getVenue(venueName);
@@ -103,6 +106,7 @@ public class PurchasePanel extends JPanel
             }
             displayWindow.setVenueSeats(venueSeats);
             displayWindow.setVenue(venueName);
+            displayWindow.setPrice(price);
             venueName = "";
             displayWindow.showPanel(guiWindow.VENUE_A_PANEL);
         });
