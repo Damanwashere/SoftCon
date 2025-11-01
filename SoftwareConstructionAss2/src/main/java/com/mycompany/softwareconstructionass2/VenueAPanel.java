@@ -177,7 +177,8 @@ public class VenueAPanel extends JPanel
             {
                 try
                 {
-                    venueManager.bookSeat(venue, seat.getColName(), seat.getColName());
+                    int currentUser = displayWindow.getCurrentUser().getUserID();
+                    venueManager.bookSeat(currentUser, venue, seat.getColName(), seat.getRowName());
                     
                 }
                 catch(SQLException e)
@@ -206,6 +207,17 @@ public class VenueAPanel extends JPanel
     {
         this.seatPanel.removeAll();
         
+        try
+        {
+            this.seats = venueManager.getVenue(this.venue);
+        }
+        catch(SQLException e)
+        {
+            System.err.println("Failed to update seats");
+            this.seatPanel.revalidate();
+            this.seatPanel.repaint();
+            return;
+        }
         int rows = seats.length;        
         //practicinmg ternary operator
         int cols = (rows > 0) ? seats[0].length : 0;

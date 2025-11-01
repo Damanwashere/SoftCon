@@ -146,8 +146,9 @@ public class VenueManager {
     public void bookSeat(int userID, String venue, String col, String row) throws SQLException
     {        
         String seatLocation = col + row;
-        
-        try(java.sql.Connection conn = DBManage.conn)
+        java.sql.Connection conn = DBManage.conn;
+        conn.setAutoCommit(false);
+        try
         {
             String update = "UPDATE " + venue + " SET " + col + " = true WHERE SEATROWS =?";
             String insert = "INSERT INTO TICKET (USER_ID, VENUE, SEAT) VALUES (?, ?, ?)";
@@ -169,11 +170,11 @@ public class VenueManager {
                 
                 System.out.println("Ticket inserted");
                 conn.commit();
-            }
-            catch(SQLException e)
-            {
-                throw e;
-            }
+            }            
+        }
+        catch(SQLException e)
+        {
+            throw e;
         }
     }
     
