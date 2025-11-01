@@ -55,7 +55,7 @@ public class guiWindow extends JFrame
         try
         {
 //            this.userManager.createUserTable();
-            this.venueManager.deleteVenues();
+//            this.venueManager.deleteVenues();
 //            this.venueManager.createVenueTable();
 //            this.venueManager.populateTable();
 //            this.ticketManager.createTicketTable();
