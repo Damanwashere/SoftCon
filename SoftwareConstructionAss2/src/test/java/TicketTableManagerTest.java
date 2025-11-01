@@ -36,14 +36,14 @@ public class TicketTableManagerTest {
     void testAddTicket() throws SQLException{
         String booked = null;
         int ticketID = 1;
-        int userID = 1;
+        int userID = 1000;
         String venue = "GWYN";
         String Seat = "C3R3";
         Ticket ticket = new Ticket(ticketID, userID, venue, Seat);
         tm.addTicket(ticket);
         Connection conn = db.getConnection();
         Statement stmt = conn.createStatement();
-        ResultSet RS = stmt.executeQuery("SELECT VENUE FROM TICKET WHERE USER_ID = 1");
+        ResultSet RS = stmt.executeQuery("SELECT VENUE FROM TICKET WHERE USER_ID = 1000");
         if(RS.next()){
             booked = RS.getString(1);
         }

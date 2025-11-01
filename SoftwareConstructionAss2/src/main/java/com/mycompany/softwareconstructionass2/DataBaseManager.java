@@ -68,14 +68,8 @@ public class DataBaseManager {
         }
     }
     
-    public static void main(String[] args) {
-        DataBaseManager dbManager = new DataBaseManager();
-        System.out.println(dbManager.getConnection());
-    }
-    
-//    @Test
-//    public void testConnection() {
-//        TableManager db = new TableManager();
-//        assertNotNull(db.getConnection(), "Database connection should not be null");
+//    public static void main(String[] args) {
+//        DataBaseManager dbManager = new DataBaseManager();
+//        System.out.println(dbManager.getConnection());
 //    }
 }
