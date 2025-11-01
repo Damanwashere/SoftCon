@@ -54,11 +54,11 @@ public class guiWindow extends JFrame
 //        UserData test1User = new Student(2, "Zoey");
         try
         {
-//            this.userManager.createUserTable();
+            this.userManager.createUserTable();
 //            this.venueManager.deleteVenues();
-//            this.venueManager.createVenueTable();
-//            this.venueManager.populateTable();
-//            this.ticketManager.createTicketTable();
+            this.venueManager.createVenueTable();
+            this.venueManager.populateTable();
+            this.ticketManager.createTicketTable();
 //            this.userManager.addUser(testUser);
 //            userManager.addUser(test1User);
 
