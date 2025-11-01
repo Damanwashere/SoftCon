@@ -50,8 +50,22 @@ public class DataBaseManager {
         }
     }
     
-    public void UserTable(){
-        
+    public void establishTestConnection() {
+        try{
+            conn=DriverManager.getConnection("jdbc:derby:memory:testDB;create=true", user, pass);
+            System.out.println( url +" connected");
+        }
+        catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        }
+    }
+    
+    public void closeConnection(){
+        try{
+            if (conn != null && !conn.isClosed()) conn.close();
+        } catch(SQLException e) {
+            System.out.println("connection failed to close" + e);
+        }
     }
     
     public static void main(String[] args) {

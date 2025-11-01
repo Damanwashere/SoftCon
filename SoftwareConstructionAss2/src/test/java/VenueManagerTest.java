@@ -1,5 +1,7 @@
-
-import com.mycompany.softwareconstructionass2.UserTableManager;
+import com.mycompany.softwareconstructionass2.DataBaseManager;
+import com.mycompany.softwareconstructionass2.VenueManager;
+import java.sql.SQLException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /*
@@ -12,8 +14,32 @@ import org.junit.jupiter.api.Test;
  * @author GGPC
  */
 public class VenueManagerTest {
+    DataBaseManager db;
+    VenueManager vm;
+    @BeforeEach
+    void setup() throws SQLException{
+        vm = new VenueManager();
+        db = new DataBaseManager();
+        
+        db.closeConnection();
+        
+        db.establishTestConnection();
+        
+        vm.createVenueTable();
+        
+    }
+    
     @Test
-    void testAddingUser(){
+    void testPopulatingTable() throws SQLException{
+        boolean created = false;
+        vm.populateTable();
+    }
+    
+    @Test
+    void testBookingSeat(){
+        String name = "GWYN";
+        String col = "C2";
+        String row = "R2";
         
     }
 }
