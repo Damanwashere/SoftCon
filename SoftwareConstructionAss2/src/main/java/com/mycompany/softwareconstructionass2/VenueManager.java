@@ -118,6 +118,9 @@ public class VenueManager {
                     row[1] = RS.getBoolean(3);
                     row[2] = RS.getBoolean(4);
                     row[3] = RS.getBoolean(5);
+                    row[4] = RS.getBoolean(6);
+                    row[5] = RS.getBoolean(7);
+                    row[6] = RS.getBoolean(8);
                     rows.add(row);
                 }
                 array = rows.toArray(new boolean[rows.size()][]);
