@@ -142,33 +142,39 @@ public class VenueManager {
         }   
     }
     
-    public void bookSeat(String venue, String col, String row) throws SQLException{
+    //updating for ticketPanel
+    public void bookSeat(int userID, String venue, String col, String row) throws SQLException
+    {        
+        String seatLocation = col + row;
         
-        if("GWYN".equals(venue)){
-            try (Statement stmt = DBManage.conn.createStatement()) {
-                stmt.executeUpdate("UPDATE GWYN SET " + col + " = true where SEATROWS = '" + row + "'");
-                DBManage.conn.commit();
-                System.out.println("seat booked at GWYN");
-            } catch (SQLException e) {
+        try(java.sql.Connection conn = DBManage.conn)
+        {
+            String update = "UPDATE " + venue + " SET " + col + " = true WHERE SEATROWS =?";
+            String insert = "INSERT INTO TICKET (USER_ID, VENUE, SEAT) VALUES (?, ?, ?)";
+            
+            try(java.sql.PreparedStatement upPstmt = conn.prepareStatement(update))
+            {
+                upPstmt.setString(1, row);
+                upPstmt.executeUpdate();
+                
+                System.out.println(venue + " updated");
+            }
+            
+            try(java.sql.PreparedStatement inPstmt = conn.prepareStatement(insert))
+            {
+                inPstmt.setInt(1, userID);
+                inPstmt.setString(2, venue);
+                inPstmt.setString(3, seatLocation);
+                inPstmt.executeUpdate();
+                
+                System.out.println("Ticket inserted");
+                conn.commit();
+            }
+            catch(SQLException e)
+            {
                 throw e;
             }
-        } else if("VERSO".equals(venue)){
-            try (Statement stmt = DBManage.conn.createStatement()) {
-                stmt.executeUpdate("UPDATE VERSO SET " + col + " = true where SEATROWS = '" + row + "'");
-                System.out.println("seat booked at VERSO");
-                DBManage.conn.commit();
-            } catch (SQLException e) {
-                throw e;
-            }
-        } else if("LUCY".equals(venue)){
-            try (Statement stmt = DBManage.conn.createStatement()) {
-                stmt.executeUpdate("UPDATE LUCY SET " + col + " = true where SEATROWS = '" + row + "'");
-                System.out.println("seat booked at LUCY");
-                DBManage.conn.commit();
-            } catch (SQLException e) {
-                throw e;
-            }
-        } 
+        }
     }
     
     
@@ -204,7 +210,7 @@ public class VenueManager {
         }
         
         try{
-            vm.bookSeat("LUCY", "C3", "R3");
+            vm.bookSeat(1, "LUCY", "C3", "R3");
         } catch(SQLException e) {
             System.out.println("failed to bookSeat" + e);
         }

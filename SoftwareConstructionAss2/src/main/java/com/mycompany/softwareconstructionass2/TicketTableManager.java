@@ -8,7 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -16,7 +18,7 @@ import java.util.Set;
  * @author GGPC
  */
 public class TicketTableManager {
-    Set<Ticket> tickets = new HashSet();
+    private List<Ticket> tickets = new ArrayList<>();
     DataBaseManager DBManage = new DataBaseManager();
     
     //when using this function you will need a try catch case for the sql exception that prints the error
@@ -48,19 +50,38 @@ public class TicketTableManager {
         }   
     }
     
-    public Ticket getTickets(int userID) throws SQLException{
-        try (Statement stmt = DBManage.conn.createStatement()) {
-            ResultSet RS = stmt.executeQuery("SELECT TICKET_ID, USER_ID, VENUE, SEAT FROM TICKET where USER_ID = " + userID );
-            while(RS.next()){
-                Ticket current = new Ticket(RS.getString(1), RS.getInt(2), RS.getString(3), RS.getString(4));
-                System.out.println(current);
-                tickets.add(current);
+    //updating for ticket panel
+    public List<Ticket> getTickets(int userID) throws SQLException
+    {
+        this.tickets.clear();
+        
+        String stmt = "SELECT TICKET_ID, USER_ID, VENUE, SEAT FROM TICKET WHERE USER_ID = ?";
+        
+        try(PreparedStatement pstmt = DBManage.conn.prepareStatement(stmt))
+        {
+            pstmt.setInt(1, userID);
+            
+            try(ResultSet rs = pstmt.executeQuery())
+            {
+                while(rs.next())
+                {
+                    Ticket current = new Ticket
+                    (
+                    rs.getString(1),
+                    rs.getInt(2),
+                    rs.getString(3),
+                    rs.getString(4)
+                    );
+                    this.tickets.add(current);
+                }
             }
-            System.out.println("Ticket/s retrieved sucessfully: " + tickets);
-        } catch (SQLException e) {
+            System.out.println("Ticketlist aquired");
+        }
+        catch(SQLException e)
+        {
             throw e;
-        }   
-        return null;
+        }
+        return this.tickets;
     }
     
     public void deleteTicket(int userID) throws SQLException{

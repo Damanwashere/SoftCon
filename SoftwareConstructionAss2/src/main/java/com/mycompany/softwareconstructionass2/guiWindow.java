@@ -18,6 +18,7 @@ public class guiWindow extends JFrame
     private JPanel mainCard = new JPanel(panelLayout);
     private ChoicePanel choicePanel;
     private VenueAPanel aVenuePanel;
+    private TicketPanel ticketPanel;
     
     final static String INITIAL_PANEL = "start panel";
     final static String LOGIN_PANEL = "user login";
@@ -31,6 +32,7 @@ public class guiWindow extends JFrame
     private UserData currentUser;
     private UserTableManager userManager;
     private VenueManager venueManager;
+    private TicketTableManager ticketManager;
     
     private static final Dimension PanelSize = new Dimension(1000, 500);
     //need some cariables held for updating panels
@@ -45,6 +47,7 @@ public class guiWindow extends JFrame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.userManager = new UserTableManager();
         this.venueManager = new VenueManager();
+        this.ticketManager = new TicketTableManager();
         
         //testing my login panel
 //        UserData testUser = new Adult(1, "John");
@@ -55,6 +58,7 @@ public class guiWindow extends JFrame
 //            this.venueManager.deleteVenues();
             this.venueManager.createVenueTable();
             this.venueManager.populateTable();
+            this.ticketManager.createTicketTable();
 //            this.userManager.addUser(testUser);
 //            userManager.addUser(test1User);
 
@@ -88,7 +92,7 @@ public class guiWindow extends JFrame
         purchasePanel.setPreferredSize(PanelSize);
         mainCard.add(purchasePanel, PURCHASE_PANEL);
         
-        TicketPanel ticketPanel = new TicketPanel(this);
+        ticketPanel = new TicketPanel(this, this.ticketManager);
         ticketPanel.setPreferredSize(PanelSize);
         mainCard.add(ticketPanel, TICKET_PANEL);
         
@@ -112,6 +116,10 @@ public class guiWindow extends JFrame
         if(panelName.equals(guiWindow.CHOICE_PANEL))
         {
             this.choicePanel.updateCurrentUser(this.getCurrentUser());
+        }
+        if(panelName.equals(guiWindow.TICKET_PANEL))
+        {
+            this.ticketPanel.updateTickets();
         }
         if(panelName.equals(guiWindow.VENUE_A_PANEL))
         {
