@@ -117,6 +117,7 @@ public class UserTableManager {
                 if(!rs.next())
                 {
                     System.out.println("User does not exist in DB: " + username);
+                    return null;
                 }
                 
                 switch(rs.getString(3).toUpperCase())

@@ -115,13 +115,21 @@ public class PurchasePanel extends JPanel
         this.add(panel, BorderLayout.CENTER);
         
         JPanel exitPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JButton returnButton = new JButton("Logout");
+        JButton returnButton = new JButton("Return to home");
         returnButton.setPreferredSize(new Dimension(150, 25));
         returnButton.addActionListener(e ->
         {
-           displayWindow.logout();
+           displayWindow.showPanel(guiWindow.CHOICE_PANEL);
         });
         exitPanel.add(returnButton);
+        
+        JButton logoutButton = new JButton("Logout");
+        logoutButton.setPreferredSize(new Dimension(150, 25));
+        logoutButton.addActionListener(e ->
+        {
+           displayWindow.logout();
+        });
+        exitPanel.add(logoutButton);
         
         this.add(exitPanel, BorderLayout.SOUTH);                
     }

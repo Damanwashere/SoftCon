@@ -19,10 +19,8 @@ public class NewUserPanel extends JPanel
     private JTextField ageField = new JTextField(3);
     
     private final JCheckBox studentCheckBox = new JCheckBox("Student");
-    private final JLabel createLabel = new JLabel("enter details and submit");
     
-    private UserData newUser;
-    
+    private UserData newUser;    
     private guiWindow displayWindow;
     private UserTableManager userManager;
     
@@ -37,7 +35,7 @@ public class NewUserPanel extends JPanel
         JPanel wrapper = new JPanel(new GridBagLayout());
         
         //user input name here
-        createUserData(wrapper, new JLabel("Name:"), 0, 0, GridBagConstraints.EAST);
+        createUserData(wrapper, new JLabel("Username:"), 0, 0, GridBagConstraints.EAST);
         createUserData(wrapper, nameField, 1, 0, GridBagConstraints.WEST);
         //age here
         createUserData(wrapper, new JLabel("Age:"), 0, 1, GridBagConstraints.EAST);
@@ -56,11 +54,27 @@ public class NewUserPanel extends JPanel
         this.add(contentPanel, BorderLayout.CENTER);
         
         //comfirm button to create user
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));        
         JButton confirmButton = new JButton("Create Account");
+        confirmButton.setPreferredSize(new Dimension(200, 50));
+        confirmButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         confirmButton.addActionListener(this::holdData);
+        
+        JPanel exitPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton logoutButton = new JButton("Return to start");
+        logoutButton.setPreferredSize(new Dimension(150, 25));
+        logoutButton.addActionListener(e ->
+        {
+            displayWindow.showPanel(guiWindow.INITIAL_PANEL);
+            nameField.setText("");
+            ageField.setText("");
+        });
+        exitPanel.add(logoutButton); 
+        
         buttonPanel.add(confirmButton);
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 25, 0));
+        buttonPanel.add(Box.createVerticalStrut(25));
+        buttonPanel.add(exitPanel);
         
         this.add(buttonPanel, BorderLayout.SOUTH);        
     }
@@ -81,11 +95,9 @@ public class NewUserPanel extends JPanel
         panel.add(component, con);
     }
     
-    //hold til I work out storing logic
+    //added options to meet marking criteria, now relays info back
     private void holdData(ActionEvent e)
     {
-        createLabel.setText("");
-        
         String name = nameField.getText();
         int age = 0;
         
@@ -94,23 +106,24 @@ public class NewUserPanel extends JPanel
              age = Integer.parseInt(ageField.getText().trim());
              if(age <= 0 || age >120)
              {
-                 createLabel.setText("Please enter a valid age");
+                 JOptionPane.showMessageDialog(null, "Please enter a Valide age", "(1 - 120)", JOptionPane.ERROR_MESSAGE);
                  return;
              }
         }
         catch(NumberFormatException ex)
         {
-            System.err.println("User didnt input a number");
+            JOptionPane.showMessageDialog(null, "Must input a number for Age", "user input error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         
         if(name.isEmpty())
         {
-            createLabel.setText("username is empty");
+            JOptionPane.showMessageDialog(null, "Please input valid username", "Input empty", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if(name.contains(" "))
         {
-            createLabel.setText("username may not contain spaces");
+            JOptionPane.showMessageDialog(null, "username may not have spaces", "Input invalid", JOptionPane.ERROR_MESSAGE);
             return;
         }
         boolean isStudent = studentCheckBox.isSelected();
@@ -124,7 +137,7 @@ public class NewUserPanel extends JPanel
         }
         catch(SQLException ex)
         {
-            createLabel.setText("No valid ID's");
+            JOptionPane.showMessageDialog(null, "Database username error", "Database invalid", JOptionPane.ERROR_MESSAGE);
             System.err.println("DB id retrieval error" + ex);
             return;
         }
@@ -153,12 +166,12 @@ public class NewUserPanel extends JPanel
             }
             else
             {
-                createLabel.setText("Username already exists");
+                JOptionPane.showMessageDialog(null, "Username: " + name + " is already taken", "Failed to create new user", JOptionPane.ERROR_MESSAGE);
             }
         }
         catch(SQLException ex)
         {
-            createLabel.setText("Couldn't find user table");
+            JOptionPane.showMessageDialog(null, "Database connection error", "Database invalid", JOptionPane.ERROR_MESSAGE);
         }        
     }
 }

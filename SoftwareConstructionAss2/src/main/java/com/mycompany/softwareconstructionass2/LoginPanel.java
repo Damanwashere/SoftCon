@@ -77,7 +77,7 @@ public class LoginPanel extends JPanel
         
         //return so user doesnt need to close if clicked wrong button
         JPanel exitPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JButton returnButton = new JButton("Return to homepage");
+        JButton returnButton = new JButton("Return to start");
         returnButton.setPreferredSize(new Dimension(150, 25));
         returnButton.addActionListener(e ->
         {

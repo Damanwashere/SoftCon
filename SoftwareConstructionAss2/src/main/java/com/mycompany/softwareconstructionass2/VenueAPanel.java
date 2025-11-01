@@ -86,8 +86,7 @@ public class VenueAPanel extends JPanel
            purchaseSeat(); 
         });
         //copy and pasting my return from LoginPanel, will check if this can just be a function later, but idk
-        JPanel exitPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        
+        JPanel exitPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));        
         JButton returnButton = new JButton("Return to home");
         returnButton.setPreferredSize(new Dimension(150, 25));
         returnButton.addActionListener(e ->
