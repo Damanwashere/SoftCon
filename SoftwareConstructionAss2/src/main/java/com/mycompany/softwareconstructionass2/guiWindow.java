@@ -49,6 +49,8 @@ public class guiWindow extends JFrame
         try
         {
             this.userManager.createUserTable();
+            this.venueManager.createVenueTable();
+            this.venueManager.populateTable(name);
 //            this.userManager.addUser(testUser);
 //            userManager.addUser(test1User);
 

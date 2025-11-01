@@ -17,6 +17,7 @@ public class PurchasePanel extends JPanel
     private guiWindow displayWindow;
     private VenueManager venueSelect;
     private boolean[][] testM = testMatrix.test_matrix;
+    boolean[][] venueSeats;
     
     PurchasePanel(guiWindow window, VenueManager venue)
     {
@@ -41,19 +42,18 @@ public class PurchasePanel extends JPanel
         aVenueButton.addActionListener(e ->
         {
             //test case in meantime
-            boolean[][] venueSeats = testM;
-            //waiting for db
-//            try
-//            {
+//            boolean[][] venueSeats = testM;
+//            waiting for db
+            try
+            {
 //                waiting for fix
-//                boolean[][] venueSeats = venueSelect.getVenue("GWYN");
-//                
-//                
-//            }
-//            catch(SQLException ex)
-//            {
-//                System.err.println("problem getting venue seats");
-//            }
+                venueSeats = venueSelect.getVenue("GWYN");                
+                
+            }
+            catch(SQLException ex)
+            {
+                System.err.println("problem getting venue seats");
+            }
             displayWindow.setVenueSeats(venueSeats);
             displayWindow.showPanel(guiWindow.VENUE_A_PANEL);
         });

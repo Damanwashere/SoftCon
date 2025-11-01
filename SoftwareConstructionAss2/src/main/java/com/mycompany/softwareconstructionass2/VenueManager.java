@@ -4,8 +4,11 @@
  */
 package com.mycompany.softwareconstructionass2;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,8 +20,8 @@ public class VenueManager {
     public void createVenueTable() throws SQLException{
         try (Statement stmt = DBManage.conn.createStatement()) {
             stmt.executeUpdate("CREATE TABLE GWYN(SEATROWS int, C1 BOOLEAN,  C2 BOOLEAN, C3 BOOLEAN)");
-//            stmt.executeUpdate("CREATE TABLE VERSO(ROWS, COL1,  COL2, COL3, COL4, COL5))");
-//            stmt.executeUpdate("CREATE TABLE LUCY(ROWS, COL1,  COL2, COL3, COL4, COL5, COL6, COL7))");
+//            stmt.executeUpdate("CREATE TABLE VERSO(ROWS, COL1 BOOLEAN,  COL2 BOOLEAN, COL3 BOOLEAN, COL4 BOOLEAN, COL5 BOOLEAN))");
+//            stmt.executeUpdate("CREATE TABLE LUCY(ROWS, COL1 BOOLEAN,  COL2 BOOLEAN, COL3 BOOLEAN, COL4 BOOLEAN, COL5 BOOLEAN, COL6 BOOLEAN, COL7 BOOLEAN))");
             System.out.println("Venue Table created.");
         } catch (SQLException e) {
             if (e.getSQLState().equals("X0Y32")) {
@@ -43,16 +46,58 @@ public class VenueManager {
         }
     }
     
-    public void getVenue(String venue) throws SQLException{
+    public boolean[][] getVenue(String venue) throws SQLException{
+        List<boolean[]> rows = new ArrayList<>();
+        ResultSet RS;
         try (Statement stmt = DBManage.conn.createStatement()) {
-            for(int i = 1; i <= 3; i++){
-                stmt.executeUpdate("SELECT * FROM GWYN");
-                System.out.println("inserted row: " + i);
+            
+            if("GWYN".equals(venue)){
+                RS = stmt.executeQuery("SELECT * FROM GWYN");
+                while(RS.next()){
+                    boolean[] row = new boolean[3];
+                    row[0] = RS.getBoolean(1);
+                    row[1] = RS.getBoolean(2);
+                    row[2] = RS.getBoolean(3);
+                    rows.add(row);
+                }
+                boolean[][] array = rows.toArray(new boolean[rows.size()][]);
+            } else if("VERSO".equals(venue)){
+                RS = stmt.executeQuery("SELECT * FROM VERSO");
+                while(RS.next()){
+                    boolean[] row = new boolean[3];
+                    row[0] = RS.getBoolean(1);
+                    row[1] = RS.getBoolean(2);
+                    row[2] = RS.getBoolean(3);
+                    row[3] = RS.getBoolean(4);
+                    row[4] = RS.getBoolean(5);
+                    rows.add(row);
+                }
+                boolean[][] array = rows.toArray(new boolean[rows.size()][]);
+            } else if("LUCY".equals(venue)){
+                RS = stmt.executeQuery("SELECT * FROM LUCY");
+                while(RS.next()){
+                    boolean[] row = new boolean[3];
+                    row[0] = RS.getBoolean(1);
+                    row[1] = RS.getBoolean(2);
+                    row[2] = RS.getBoolean(3);
+                    row[3] = RS.getBoolean(4);
+                    row[4] = RS.getBoolean(5);
+                    row[5] = RS.getBoolean(6);
+                    row[6] = RS.getBoolean(7);
+                    rows.add(row);
+                }
+                boolean[][] array = rows.toArray(new boolean[rows.size()][]);
             }
+            
             System.out.println("Venue Table populated.");
         } catch (SQLException e) {
             throw e;
         }
+        return null;
+    }
+    
+    public void bookSeat(String venue) throws SQLException{
+        
     }
     
     
