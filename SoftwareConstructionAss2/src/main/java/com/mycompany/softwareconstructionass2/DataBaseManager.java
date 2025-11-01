@@ -21,13 +21,14 @@ public class DataBaseManager {
     Connection conn;
     
     public DataBaseManager(){
+        //auto connect upon creating
         establishConnection();
     }
     
     public Connection getConnection() {
         return this.conn;
     }
-    
+    //connect to the database
     public void establishConnection() {
         try{
             conn=DriverManager.getConnection(url, user, pass);

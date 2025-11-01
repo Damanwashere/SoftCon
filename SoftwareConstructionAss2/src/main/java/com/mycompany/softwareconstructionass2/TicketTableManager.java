@@ -40,7 +40,7 @@ public class TicketTableManager {
         }   
     }
     
-    //using a ticket object 
+    //using a ticket object add a ticket to the database
     public void addTicket(Ticket ticket) throws SQLException{
         String sql = "INSERT INTO TICKET (USER_ID, VENUE, SEAT) VALUES (?, ?, ?)";
         try (PreparedStatement pstmt = DBManage.conn.prepareStatement(sql);) {

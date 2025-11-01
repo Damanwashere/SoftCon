@@ -33,7 +33,7 @@ public class VenueManager {
     }
     
     
-    
+    //check if table is populated already then if not fill the entire table with false to the correft size
     public void populateTable() throws SQLException{
         ResultSet RS;
         boolean gwyn = false;
@@ -78,7 +78,7 @@ public class VenueManager {
             throw e;
         }
     }
-    
+    //reutrn the entire venue as an array of taken and avaialbe seats
     public boolean[][] getVenue(String venue) throws SQLException{
         List<boolean[]> rows = new ArrayList<>();
         boolean[][] array = {

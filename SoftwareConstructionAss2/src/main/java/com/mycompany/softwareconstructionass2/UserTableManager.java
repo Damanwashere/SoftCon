@@ -147,6 +147,7 @@ public class UserTableManager {
         }
     }
     
+    //return the current highest user id and increment by one
     public int newUserID() throws SQLException{
         try (Statement stmt = DBManage.conn.createStatement()) {
             ResultSet RS = stmt.executeQuery("SELECT MAX(USER_ID) FROM USERS");

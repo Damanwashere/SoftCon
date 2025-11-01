@@ -82,6 +82,7 @@ public class LoginPanel extends JPanel
         returnButton.addActionListener(e ->
         {
            displayWindow.showPanel(guiWindow.INITIAL_PANEL);
+           UserField.setText("");
         });
         exitPanel.add(returnButton);
         
