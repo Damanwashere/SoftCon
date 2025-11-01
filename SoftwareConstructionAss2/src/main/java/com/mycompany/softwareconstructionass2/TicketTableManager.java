@@ -42,12 +42,11 @@ public class TicketTableManager {
     
     //using a ticket object 
     public void addTicket(Ticket ticket) throws SQLException{
-        String sql = "INSERT INTO TICKET (TICKET_ID, USER_ID, VENUE, SEAT) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO TICKET (USER_ID, VENUE, SEAT) VALUES (?, ?, ?)";
         try (PreparedStatement pstmt = DBManage.conn.prepareStatement(sql);) {
-            pstmt.setInt(1, ticket.getTicketID());
-            pstmt.setInt(2, ticket.getUserID());
-            pstmt.setString(3, ticket.getVenue());
-            pstmt.setString(4, ticket.getSeat());
+            pstmt.setInt(1, ticket.getUserID());
+            pstmt.setString(2, ticket.getVenue());
+            pstmt.setString(3, ticket.getSeat());
             pstmt.executeUpdate();
             System.out.println("Ticket added sucessfully");
         } catch (SQLException e) {

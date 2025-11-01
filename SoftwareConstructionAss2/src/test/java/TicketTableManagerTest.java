@@ -1,8 +1,9 @@
+
 import com.mycompany.softwareconstructionass2.DataBaseManager;
+import com.mycompany.softwareconstructionass2.Ticket;
 import com.mycompany.softwareconstructionass2.TicketTableManager;
 import com.mycompany.softwareconstructionass2.VenueManager;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,54 +21,33 @@ import org.junit.jupiter.api.Test;
  *
  * @author GGPC
  */
-public class VenueManagerTest {
+public class TicketTableManagerTest {
     DataBaseManager db;
-    VenueManager vm;
     TicketTableManager tm;
     @BeforeEach
     void setup() throws SQLException{
-        vm = new VenueManager();
         db = new DataBaseManager();
         tm = new TicketTableManager();
         
-        vm.createVenueTable();
         tm.createTicketTable();
     }
     
     @Test
-    void testPopulatingTable() throws SQLException{
-        boolean created = false;
-        ResultSet RS;
-        vm.populateTable();
-        Connection conn = db.getConnection();
-        Statement stmt = conn.createStatement();        
-        RS = stmt.executeQuery("SELECT SEATROWS FROM GWYN where C3 = false AND true");
-        if(RS.next()){
-            created = true;
-        }
-        Assertions.assertTrue(created, "Table Should Exists");
-        
-        RS.close();
-        stmt.close();
-    }
-    
-    @Test
-    void testBookingSeat() throws SQLException{
-        boolean booked = false;
+    void testAddTicket() throws SQLException{
+        String booked = null;
+        int ticketID = 1;
         int userID = 1;
-        String name = "GWYN";
-        String col = "C3";
-        String row = "R3";
-        vm.populateTable();
-        vm.bookSeat(userID, name, col, row);
-        boolean[][] testArray = vm.getVenue("GWYN");
+        String venue = "GWYN";
+        String Seat = "C3R3";
+        Ticket ticket = new Ticket(ticketID, userID, venue, Seat);
+        tm.addTicket(ticket);
         Connection conn = db.getConnection();
         Statement stmt = conn.createStatement();
-        ResultSet RS = stmt.executeQuery("SELECT " + col + " FROM " + name + " WHERE SEATROWS = '" + row + "'");
+        ResultSet RS = stmt.executeQuery("SELECT VENUE FROM TICKET WHERE USER_ID = 1");
         if(RS.next()){
-            booked = RS.getBoolean(1);
+            booked = RS.getString(1);
         }
-        Assertions.assertTrue(booked, "will be true if sucessfully booked seat");
+        Assertions.assertEquals("GWYN", booked);
         
         RS.close();
         stmt.close();
@@ -79,7 +59,6 @@ public class VenueManagerTest {
         
         Connection conn = db.getConnection();
         Statement stmt = conn.createStatement();
-        vm.deleteVenues();
         tm.deleteEverythingTicket();
         db.closeConnection();
     }
