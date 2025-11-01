@@ -50,7 +50,7 @@ public class guiWindow extends JFrame
         {
             this.userManager.createUserTable();
             this.venueManager.createVenueTable();
-            this.venueManager.populateTable(name);
+            this.venueManager.populateTable();
 //            this.userManager.addUser(testUser);
 //            userManager.addUser(test1User);
 

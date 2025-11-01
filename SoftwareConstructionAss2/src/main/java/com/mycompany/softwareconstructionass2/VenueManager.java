@@ -20,8 +20,8 @@ public class VenueManager {
     public void createVenueTable() throws SQLException{
         try (Statement stmt = DBManage.conn.createStatement()) {
             stmt.executeUpdate("CREATE TABLE GWYN(SEATROWS VARCHAR(5), C1 BOOLEAN,  C2 BOOLEAN, C3 BOOLEAN)");
-            stmt.executeUpdate("CREATE TABLE VERSO(SEATROWS VARCHAR(5), COL1 BOOLEAN,  COL2 BOOLEAN, COL3 BOOLEAN, COL4 BOOLEAN, COL5 BOOLEAN)");
-            stmt.executeUpdate("CREATE TABLE LUCY(SEATROWS VARCHAR(5), COL1 BOOLEAN,  COL2 BOOLEAN, COL3 BOOLEAN, COL4 BOOLEAN, COL5 BOOLEAN, COL6 BOOLEAN, COL7 BOOLEAN)");
+            stmt.executeUpdate("CREATE TABLE VERSO(SEATROWS VARCHAR(5), C1 BOOLEAN,  C2 BOOLEAN, C3 BOOLEAN, C4 BOOLEAN, C5 BOOLEAN)");
+            stmt.executeUpdate("CREATE TABLE LUCY(SEATROWS VARCHAR(5), C1 BOOLEAN,  C2 BOOLEAN, C3 BOOLEAN, C4 BOOLEAN, C5 BOOLEAN, C6 BOOLEAN, C7 BOOLEAN)");
             System.out.println("Venue Table created.");
         } catch (SQLException e) {
             if (e.getSQLState().equals("X0Y32")) {
@@ -34,40 +34,45 @@ public class VenueManager {
     
     
     
-    public void populateTable(String venue) throws SQLException{
+    public void populateTable() throws SQLException{
         ResultSet RS;
+        boolean gwyn = false;
+        boolean verso = false;
+        boolean lucy = false;
         try (Statement stmt = DBManage.conn.createStatement()) {
-            if("GWYN".equals(venue)){
                 RS = stmt.executeQuery("SELECT SEATROWS FROM GWYN where C1 = false AND true");
                 if(RS.next()){
                     System.out.println("GWYN already populated");
-                    return;
+                    gwyn = true;
                 }
-                for(int i = 1; i <= 3; i++){
-                    stmt.executeUpdate("INSERT INTO GWYN VALUES ('R" + i + "', false, false, false)");
-                    System.out.println("inserted row: " + i);
+                if(gwyn == false){
+                    for(int i = 1; i <= 3; i++){
+                        stmt.executeUpdate("INSERT INTO GWYN VALUES ('R" + i + "', false, false, false)");
+                        System.out.println("inserted row: " + i);
+                    }
                 }
-            } else if("VERSO".equals(venue)) {
                 RS = stmt.executeQuery("SELECT SEATROWS FROM VERSO where C1 = false AND true");
                 if(RS.next()){
-                    System.out.println("GWYN already populated");
-                    return;
+                    System.out.println("VERSO already populated");
+                    verso = true;
                 }
-                for(int i = 1; i <= 5; i++){
-                    stmt.executeUpdate("INSERT INTO VERSO VALUES ('R" + i + "', false, false, false, false, false)");
-                    System.out.println("inserted row: " + i);
+                if(verso == false){
+                    for(int i = 1; i <= 5; i++){
+                        stmt.executeUpdate("INSERT INTO VERSO VALUES ('R" + i + "', false, false, false, false, false)");
+                        System.out.println("inserted row: " + i);
+                    }
                 }
-            } else if("LUCY".equals(venue)) {
                 RS = stmt.executeQuery("SELECT SEATROWS FROM LUCY where C1 = false AND true");
                 if(RS.next()){
-                    System.out.println("GWYN already populated");
-                    return;
+                    System.out.println("LUCY already populated");
+                    lucy = true;
                 }
-                for(int i = 1; i <= 7; i++){
-                    stmt.executeUpdate("INSERT INTO LUCY VALUES ('R" + i + "', false, false, false, false, false, false, false)");
-                    System.out.println("inserted row: " + i);
+                    if(lucy == false){
+                    for(int i = 1; i <= 7; i++){
+                        stmt.executeUpdate("INSERT INTO LUCY VALUES ('R" + i + "', false, false, false, false, false, false, false)");
+                        System.out.println("inserted row: " + i);
+                    }
                 }
-            }
             System.out.println("Venue Table populated.");
         } catch (SQLException e) {
             throw e;
@@ -96,7 +101,7 @@ public class VenueManager {
             } else if("VERSO".equals(venue)){
                 RS = stmt.executeQuery("SELECT * FROM VERSO");
                 while(RS.next()){
-                    boolean[] row = new boolean[3];
+                    boolean[] row = new boolean[5];
                     row[0] = RS.getBoolean(2);
                     row[1] = RS.getBoolean(3);
                     row[2] = RS.getBoolean(4);
@@ -108,7 +113,7 @@ public class VenueManager {
             } else if("LUCY".equals(venue)){
                 RS = stmt.executeQuery("SELECT * FROM LUCY");
                 while(RS.next()){
-                    boolean[] row = new boolean[3];
+                    boolean[] row = new boolean[7];
                     row[0] = RS.getBoolean(2);
                     row[1] = RS.getBoolean(3);
                     row[2] = RS.getBoolean(4);
@@ -142,27 +147,27 @@ public class VenueManager {
     public void bookSeat(String venue, String col, String row) throws SQLException{
         
         if("GWYN".equals(venue)){
-                try (Statement stmt = DBManage.conn.createStatement()) {
-                    stmt.executeUpdate("UPDATE GWYN SET " + col + " = true where SEATROWS = '" + row + "'");
-                    System.out.println("seat booked at GWYN");
-                } catch (SQLException e) {
-                    throw e;
-                }
-            } else if("VERSO".equals(venue)){
-                try (Statement stmt = DBManage.conn.createStatement()) {
-                    stmt.executeUpdate("UPDATE VERSO SET " + col + " = true where SEATROWS = '" + row + "'");
-                    System.out.println("seat booked at VERSO");
-                } catch (SQLException e) {
-                    throw e;
-                }
-            } else if("LUCY".equals(venue)){
-                try (Statement stmt = DBManage.conn.createStatement()) {
-                    stmt.executeUpdate("UPDATE LUCY SET " + col + " = true where SEATROWS = '" + row + "'");
-                    System.out.println("seat booked at LUCY");
-                } catch (SQLException e) {
-                    throw e;
-                }
-            } 
+            try (Statement stmt = DBManage.conn.createStatement()) {
+                stmt.executeUpdate("UPDATE GWYN SET " + col + " = true where SEATROWS = '" + row + "'");
+                System.out.println("seat booked at GWYN");
+            } catch (SQLException e) {
+                throw e;
+            }
+        } else if("VERSO".equals(venue)){
+            try (Statement stmt = DBManage.conn.createStatement()) {
+                stmt.executeUpdate("UPDATE VERSO SET " + col + " = true where SEATROWS = '" + row + "'");
+                System.out.println("seat booked at VERSO");
+            } catch (SQLException e) {
+                throw e;
+            }
+        } else if("LUCY".equals(venue)){
+            try (Statement stmt = DBManage.conn.createStatement()) {
+                stmt.executeUpdate("UPDATE LUCY SET " + col + " = true where SEATROWS = '" + row + "'");
+                System.out.println("seat booked at LUCY");
+            } catch (SQLException e) {
+                throw e;
+            }
+        } 
     }
     
     
@@ -180,27 +185,36 @@ public class VenueManager {
         }
         
         try{
-            vm.populateTable("GWYN");
+            vm.populateTable();
         } catch(SQLException e) {
             System.out.println("failed to add row" + e);
         }
         
         try{
-            boolean[][] array = vm.getVenue("GWYN");
-            System.out.println(array[0][0]);
-            
+            boolean[][] array = vm.getVenue("LUCY");
+            for(int i = 0; i < 7; i++){
+                for(int j = 0; j < 7; j++){
+                    System.out.print("[" + array[i][j] + "]");
+                }
+                System.out.println("");
+            }
         } catch(SQLException e) {
             System.out.println("failed to get table" + e);
         }
         
         try{
-            vm.bookSeat("GWYN", "C1", "R1");
+            vm.bookSeat("LUCY", "C3", "R3");
         } catch(SQLException e) {
             System.out.println("failed to bookSeat" + e);
         }
         try{
-            boolean[][] array = vm.getVenue("GWYN");
-            System.out.println(array[0][0]);
+            boolean[][] array = vm.getVenue("LUCY");
+            for(int i = 0; i < 7; i++){
+                for(int j = 0; j < 7; j++){
+                    System.out.print("[" + array[i][j] + "]");
+                }
+                System.out.println("");
+            }
             
         } catch(SQLException e) {
             System.out.println("failed to get table" + e);
