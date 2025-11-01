@@ -33,7 +33,11 @@ public class guiWindow extends JFrame
     private VenueManager venueManager;
     
     private static final Dimension PanelSize = new Dimension(1000, 500);
+    //need some cariables held for updating panels
     private boolean[][] testSeats;
+    private double discount = 0.5;
+    private double price = 1;
+    private String venue = "";
     
     public guiWindow(String name)
     {
@@ -48,6 +52,7 @@ public class guiWindow extends JFrame
         try
         {
             this.userManager.createUserTable();
+//            this.venueManager.deleteVenues();
             this.venueManager.createVenueTable();
             this.venueManager.populateTable();
 //            this.userManager.addUser(testUser);
@@ -87,7 +92,7 @@ public class guiWindow extends JFrame
         ticketPanel.setPreferredSize(PanelSize);
         mainCard.add(ticketPanel, TICKET_PANEL);
         
-        this.aVenuePanel = new VenueAPanel(this);
+        this.aVenuePanel = new VenueAPanel(this, this.venueManager);
         aVenuePanel.setPreferredSize(PanelSize);
         mainCard.add(aVenuePanel, VENUE_A_PANEL);
         
@@ -110,7 +115,7 @@ public class guiWindow extends JFrame
         }
         if(panelName.equals(guiWindow.VENUE_A_PANEL))
         {
-            this.aVenuePanel.updatePanel(this.getVenueSeats());
+            this.aVenuePanel.updatePanel(this.getVenueSeats(), this.getDiscount(), this.getPrice(), this.getVenue());
         }
     }
     
@@ -149,9 +154,40 @@ public class guiWindow extends JFrame
         return this.testSeats;
     }
     
+    public void setDiscount(double disc)
+    {
+        this.discount = disc;
+    }
+    
+    public double getDiscount()
+    {
+        return this.discount;
+    }
+    
+    public void setPrice(double priceupdate)
+    {
+        this.price = priceupdate;
+    }
+    
+    public double getPrice()
+    {
+        return this.price;
+    }
+    
+    public void setVenue(String venueupdate)
+    {
+        this.venue = venueupdate;
+    }
+    
+    public String getVenue()
+    {
+        return this.venue;
+    } 
+    
     public void logout()
     {
         this.currentUser = null;
+        this.venue = "";
         
         showPanel(guiWindow.INITIAL_PANEL);
     }

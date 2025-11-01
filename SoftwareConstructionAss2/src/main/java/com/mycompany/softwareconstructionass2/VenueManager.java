@@ -147,6 +147,7 @@ public class VenueManager {
         if("GWYN".equals(venue)){
             try (Statement stmt = DBManage.conn.createStatement()) {
                 stmt.executeUpdate("UPDATE GWYN SET " + col + " = true where SEATROWS = '" + row + "'");
+                DBManage.conn.commit();
                 System.out.println("seat booked at GWYN");
             } catch (SQLException e) {
                 throw e;
@@ -155,6 +156,7 @@ public class VenueManager {
             try (Statement stmt = DBManage.conn.createStatement()) {
                 stmt.executeUpdate("UPDATE VERSO SET " + col + " = true where SEATROWS = '" + row + "'");
                 System.out.println("seat booked at VERSO");
+                DBManage.conn.commit();
             } catch (SQLException e) {
                 throw e;
             }
@@ -162,6 +164,7 @@ public class VenueManager {
             try (Statement stmt = DBManage.conn.createStatement()) {
                 stmt.executeUpdate("UPDATE LUCY SET " + col + " = true where SEATROWS = '" + row + "'");
                 System.out.println("seat booked at LUCY");
+                DBManage.conn.commit();
             } catch (SQLException e) {
                 throw e;
             }

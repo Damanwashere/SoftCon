@@ -52,6 +52,7 @@ public class PurchasePanel extends JPanel
                 System.err.println("problem getting venue seats");
             }
             displayWindow.setVenueSeats(venueSeats);
+            displayWindow.setVenue(venueName);
             venueName = "";
             displayWindow.showPanel(guiWindow.VENUE_A_PANEL);
         });
@@ -77,6 +78,7 @@ public class PurchasePanel extends JPanel
                 System.err.println("problem getting venue seats");
             }
             displayWindow.setVenueSeats(venueSeats);
+            displayWindow.setVenue(venueName);
             venueName = "";
             displayWindow.showPanel(guiWindow.VENUE_A_PANEL);
         });
@@ -100,6 +102,7 @@ public class PurchasePanel extends JPanel
                 System.err.println("problem getting venue seats");
             }
             displayWindow.setVenueSeats(venueSeats);
+            displayWindow.setVenue(venueName);
             venueName = "";
             displayWindow.showPanel(guiWindow.VENUE_A_PANEL);
         });
