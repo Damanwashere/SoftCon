@@ -68,7 +68,7 @@ public class VenueManager {
                     lucy = true;
                 }
                     if(lucy == false){
-                    for(int i = 1; i <= 7; i++){
+                    for(int i = 1; i <= 5; i++){
                         stmt.executeUpdate("INSERT INTO LUCY VALUES ('R" + i + "', false, false, false, false, false, false, false)");
                         System.out.println("inserted row: " + i);
                     }
@@ -119,8 +119,6 @@ public class VenueManager {
                     row[2] = RS.getBoolean(4);
                     row[3] = RS.getBoolean(5);
                     row[4] = RS.getBoolean(6);
-                    row[5] = RS.getBoolean(7);
-                    row[6] = RS.getBoolean(8);
                     rows.add(row);
                 }
                 array = rows.toArray(new boolean[rows.size()][]);
@@ -192,7 +190,7 @@ public class VenueManager {
         
         try{
             boolean[][] array = vm.getVenue("LUCY");
-            for(int i = 0; i < 7; i++){
+            for(int i = 0; i < 5; i++){
                 for(int j = 0; j < 7; j++){
                     System.out.print("[" + array[i][j] + "]");
                 }
@@ -209,7 +207,7 @@ public class VenueManager {
         }
         try{
             boolean[][] array = vm.getVenue("LUCY");
-            for(int i = 0; i < 7; i++){
+            for(int i = 0; i < 5; i++){
                 for(int j = 0; j < 7; j++){
                     System.out.print("[" + array[i][j] + "]");
                 }
